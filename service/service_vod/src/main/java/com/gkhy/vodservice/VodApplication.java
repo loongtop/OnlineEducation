@@ -10,12 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 public class VodApplication {
 
     public static void main(String[] args) {
-
         SpringApplication app = new SpringApplication(VodApplication.class);
         app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
         System.out.println("VodApplication starting..........");
-
     }
 }
 

@@ -1,7 +1,14 @@
 package com.gkhy.eduservice.entity;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
+import com.gkhy.eduservice.entity.vo.TeacherQuery;
 import com.gkhy.servicebase.DateModel;
 import lombok.*;
 
@@ -21,7 +28,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Edu_Teacher")
+@Table
 public class EduTeacher extends DateModel implements Serializable {
 
     private static final long serialVersionUID = -4157044038035512717L;
@@ -36,7 +43,7 @@ public class EduTeacher extends DateModel implements Serializable {
             strategy = GenerationType.SEQUENCE,
             generator = "teacher_sequence"
     )
-    @Column(name = "id", unique = true, nullable = false, length = 19)
+    @Column(unique = true, nullable = false, length = 19)
     private Long id;
 
     @Size(min = 4, max = 64, message = "Minimum username length: 4 characters")
@@ -59,4 +66,23 @@ public class EduTeacher extends DateModel implements Serializable {
         this.name = name;
         this.intro = intro;
     }
+
+    public EduTeacher(TeacherQuery teacherQuery) {
+         this.name = teacherQuery.getName();
+         this.level = teacherQuery.getLevel();
+         Instant beain = LocalDateTime.parse(teacherQuery.getBegin(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                         .withZone(ZoneId.systemDefault())
+                        .withLocale(Locale.CANADA ))
+                 .toInstant(ZoneOffset.UTC);
+
+        Instant end = LocalDateTime.parse(teacherQuery.getEnd(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        .withZone(ZoneId.systemDefault())
+                        .withLocale(Locale.CANADA ))
+                .toInstant(ZoneOffset.UTC);
+
+         this.setGmtCreate(beain);
+         this.setGmtModified(end);
+    }
+
+
 }
