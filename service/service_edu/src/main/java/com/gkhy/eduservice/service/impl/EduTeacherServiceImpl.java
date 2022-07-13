@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EduTeacherServiceImpl implements EduTeacherService {
@@ -15,5 +16,10 @@ public class EduTeacherServiceImpl implements EduTeacherService {
 
     public List<EduTeacher> list() {
         return eduTeacherRepository.findAll();
+    }
+
+    @Override
+    public Optional<EduTeacher> findById(Long id) {
+        return eduTeacherRepository.findById(id);
     }
 }
