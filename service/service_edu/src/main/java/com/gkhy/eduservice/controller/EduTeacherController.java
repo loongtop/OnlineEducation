@@ -1,9 +1,9 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.R;
+import com.gkhy.commonutils.Result;
 
 import com.gkhy.eduservice.entity.EduTeacher;
-import com.gkhy.eduservice.entity.vo.TeacherQuery;
+import com.gkhy.eduservice.entity.vo.TeacherVo;
 import com.gkhy.eduservice.service.EduTeacherService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.Optional;
  * teacher controller
  * </p>
  *
- * @author testjava
+ * @author leo
  * @since 2022-07-11
  */
 @RestController
@@ -31,74 +31,74 @@ public class EduTeacherController {
     //access site： http://localhost:8081/eduservice/teacher/findAll
     //Query all data in the lecturer table
     @GetMapping("findAll")
-    public R findAllTeacher() {
+    public Result findAllTeacher() {
         //Call the method of service to query all operations
         List<EduTeacher> list = eduTeacherService.list();
-        return R.ok().data("items", list);
+        return Result.success().data("items", list);
     }
 
     //Add the method of the lecturer interface
     @PostMapping("add")
-    public R addTeacher(@RequestBody EduTeacher eduTeacher) {
+    public Result addTeacher(@RequestBody EduTeacher eduTeacher) {
         eduTeacherService.save(eduTeacher);
         boolean save = true;
         if (save) {
-            return R.ok();
+            return Result.success();
         } else {
-            return R.error();
+            return Result.fail();
         }
     }
 
     //Query by instructor id
     @GetMapping("get/{id}")
-    public R getTeacher(@PathVariable Long id) {
+    public Result getTeacher(@PathVariable Long id) {
 
         Optional<EduTeacher> eduTeacher = eduTeacherService.findById(id);
         if (eduTeacher.isPresent()) {
-            return R.ok().data("teacher", eduTeacher);
+            return Result.success().data("teacher", eduTeacher);
         }
-        return R.error();
+        return Result.fail();
     }
 
 
     //Teacher modification function
     @PostMapping("update")
-    public R updateTeacher(@RequestBody EduTeacher eduTeacherIn) {
+    public Result updateTeacher(@RequestBody EduTeacher eduTeacherIn) {
         Long id = eduTeacherIn.getId();
         Optional<EduTeacher> eduTeacher = eduTeacherService.findById(id);
         if (eduTeacher.isPresent()) {
             eduTeacherService.update(eduTeacherIn);
-            return R.ok().data("teacher", eduTeacher);
+            return Result.success().data("teacher", eduTeacher);
         }
-        return R.error();
+        return Result.fail();
     }
 
     //logically delete a teacher (IsDeleted = true)
     @DeleteMapping("remove/{id}")
-    public R removeTeacher(@PathVariable Long id) {
+    public Result removeTeacher(@PathVariable Long id) {
         Optional<EduTeacher> eduTeacher = eduTeacherService.findById(id);
         if (eduTeacher.isPresent()) {
             eduTeacherService.removeTeacher(eduTeacher.get());
-            return R.ok();
+            return Result.success();
         }
-        return R.error().data("teacher", "Can not find it!");
+        return Result.fail().data("teacher", "Can not find it!");
     }
 
     // delete a teacher from database
     @DeleteMapping("delete/{id}")
-    public R deleteTeacher(@PathVariable Long id) {
+    public Result deleteTeacher(@PathVariable Long id) {
         eduTeacherService.deleteById(id);
         boolean flag = true;
         if (flag) {
-            return R.ok();
+            return Result.success();
         } else {
-            return R.error();
+            return Result.fail();
         }
     }
 
     //Method for querying lecturers by page
     @GetMapping("page/{current}/{limit}")
-    public R pageListTeacher(@PathVariable int current, @PathVariable int limit) {
+    public Result pageListTeacher(@PathVariable int current, @PathVariable int limit) {
         /*
         *   current : current page
             limit : records per page
@@ -107,13 +107,13 @@ public class EduTeacherController {
 
         List<EduTeacher> eduTeacherList = eduTeacherService.list(pageable);
         long total = eduTeacherList.size();
-        return R.ok().data("total", total).data("rows",eduTeacherList);
+        return Result.success().data("total", total).data("rows",eduTeacherList);
     }
 
     //Method of conditional query with pagination
     @PostMapping("pageTeacherCondition/{current}/{limit}")
-    public R pageTeacherCondition(@PathVariable int current, @PathVariable int limit,
-                                  @RequestBody(required = false)  TeacherQuery teacherQuery) {
+    public Result pageTeacherCondition(@PathVariable int current, @PathVariable int limit,
+                                       @RequestBody(required = false) TeacherVo teacherQuery) {
         //Create page object
         Pageable pageable = PageRequest.of(current, limit);
 
@@ -133,7 +133,7 @@ public class EduTeacherController {
         List<EduTeacher> eduTeacherList = eduTeacherService.list(eduTeacherExample);
         long total = eduTeacherList.size();
 
-        return R.ok().data("total",total).data("rows",eduTeacherList);
+        return Result.success().data("total",total).data("rows",eduTeacherList);
    }
 }
 

@@ -1,6 +1,6 @@
 package com.gkhy.servicebase.exceptionhandler;
 
-import com.gkhy.commonutils.R;
+import com.gkhy.commonutils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,27 +12,27 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody //to return data
-    public R error(Exception e) {
+    public Result error(Exception e) {
         e.printStackTrace();
-        return R.error().message("Global exception handling performed..");
+        return Result.fail().message("Global exception handling performed..");
     }
 
 
     @ExceptionHandler(ArithmeticException.class)
     @ResponseBody
-    public R error(ArithmeticException e) {
+    public Result error(ArithmeticException e) {
         e.printStackTrace();
-        return R.error().message("ArithmeticException exception handling performed..");
+        return Result.fail().message("ArithmeticException exception handling performed..");
     }
 
     //custom exception
-    @ExceptionHandler(AcademyException.class)
+    @ExceptionHandler(EducationException.class)
     @ResponseBody
-    public R error(AcademyException e) {
+    public Result error(EducationException e) {
         log.error(e.getMessage());
         e.printStackTrace();
 
-        return R.error().code(e.getCode()).message(e.getMsg());
+        return Result.fail().code(e.getCode()).message(e.getMsg());
     }
 
 }

@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class TeacherQuery {
+public class TeacherVo {
 
     private String name;
 

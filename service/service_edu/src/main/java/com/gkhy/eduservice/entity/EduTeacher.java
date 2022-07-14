@@ -8,7 +8,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import com.gkhy.eduservice.entity.vo.TeacherQuery;
+import com.gkhy.eduservice.entity.vo.TeacherVo;
 import com.gkhy.servicebase.DateModel;
 import lombok.*;
 
@@ -67,7 +67,7 @@ public class EduTeacher extends DateModel implements Serializable {
         this.intro = intro;
     }
 
-    public EduTeacher(TeacherQuery teacherQuery) {
+    public EduTeacher(TeacherVo teacherQuery) {
          this.name = teacherQuery.getName();
          this.level = teacherQuery.getLevel();
          Instant beain = LocalDateTime.parse(teacherQuery.getBegin(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
