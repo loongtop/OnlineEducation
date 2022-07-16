@@ -31,6 +31,7 @@ class EduApplicationTests {
 
     @Test
     void findAll() {
+        // test
         List<EduTeacher> eduTeacherList =  eduTeacherService.list();
         System.out.println(eduTeacherList);
     }

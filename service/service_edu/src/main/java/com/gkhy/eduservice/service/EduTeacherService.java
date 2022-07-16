@@ -1,6 +1,5 @@
 package com.gkhy.eduservice.service;
 
-import com.gkhy.commonutils.JPAExt.paging.PageUtil;
 import com.gkhy.eduservice.entity.EduTeacher;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -27,8 +26,6 @@ public interface EduTeacherService {
     void save(EduTeacher eduTeacherIn);
 
     void removeTeacher(EduTeacher eduTeacher);
-
-    PageUtil<EduTeacher> getTeacherListPage(int current, int limit);
 
     Optional<EduTeacher> findOne(Specification<EduTeacher> spec);
 

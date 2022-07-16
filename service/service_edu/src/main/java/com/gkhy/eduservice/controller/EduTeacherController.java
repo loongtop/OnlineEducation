@@ -1,13 +1,11 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.Result;
+import com.gkhy.commonutils.result.Result;
 
-import com.gkhy.commonutils.JPAExt.paging.PageUtil;
 import com.gkhy.eduservice.entity.EduTeacher;
 import com.gkhy.eduservice.entity.vo.TeacherVo;
 import com.gkhy.eduservice.service.EduTeacherService;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,19 +14,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
-
-import static org.apache.commons.lang3.BooleanUtils.*;
 
 /**
  * <p>

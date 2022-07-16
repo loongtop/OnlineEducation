@@ -1,9 +1,6 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.Result;
-import com.gkhy.eduservice.entity.EduCourse;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.gkhy.commonutils.result.Result;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -1,6 +1,6 @@
 package com.gkhy.servicebase.exceptionhandler;
 
-import com.gkhy.commonutils.Result;
+import com.gkhy.commonutils.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,6 +1,5 @@
 package com.gkhy.eduservice.service.impl;
 
-import com.gkhy.commonutils.JPAExt.paging.PageUtil;
 import com.gkhy.eduservice.entity.EduTeacher;
 import com.gkhy.eduservice.repository.EduTeacherRepository;
 import com.gkhy.eduservice.service.EduTeacherService;
@@ -62,32 +61,20 @@ public class EduTeacherServiceImpl implements EduTeacherService {
     }
 
     @Override
-    public PageUtil<EduTeacher> getTeacherListPage(int current, int limit) {
-        PageUtil<EduTeacher> pageUtil = new PageUtil<>();
-        Pageable pageable = PageRequest.of(current, limit, Sort.Direction.ASC, "id");
-        Page<EduTeacher> eduTeacherPage = eduTeacherRepository.findAll(pageable);
-
-        pageUtil.setContent(eduTeacherPage.getContent());
-        pageUtil.setTotalPages(eduTeacherPage.getTotalPages());
-        pageUtil.setTotalElements(Math.toIntExact(eduTeacherPage.getTotalElements()));
-        pageUtil.setPageSize(eduTeacherPage.getSize());
-        pageUtil.setNumber(eduTeacherPage.getNumber());
-
-        return pageUtil;
-    }
-
-    @Override
     public Optional<EduTeacher> findOne(Specification<EduTeacher> spec) {
         return eduTeacherRepository.findOne(spec);
     }
+
     @Override
     public List<EduTeacher> findAll(Specification<EduTeacher> spec) {
         return eduTeacherRepository.findAll(spec);
     }
+
     @Override
     public Page<EduTeacher> findAll(Specification<EduTeacher> spec, Pageable pageable) {
         return eduTeacherRepository.findAll(spec, pageable);
     }
+
     @Override
     public List<EduTeacher> findAll(Specification<EduTeacher> spec, Sort sort) {
         return eduTeacherRepository.findAll(spec, sort);
