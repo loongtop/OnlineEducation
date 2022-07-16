@@ -3,6 +3,8 @@ package com.gkhy.eduservice.entity.vo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @NoArgsConstructor
 public class TeacherVo {
@@ -11,7 +13,7 @@ public class TeacherVo {
 
     private Integer level;
 
-    private String begin;
+    private Date begin;
 
-    private String end;
+    private Date end;
 }

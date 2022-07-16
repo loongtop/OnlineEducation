@@ -23,7 +23,8 @@ import javax.validation.constraints.Size;
  * @author leo
  * @since 2022-07-11
  */
-@Data
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -60,29 +61,5 @@ public class EduTeacher extends DateModel implements Serializable {
     private Integer sort;
 
     private Boolean isDeleted;
-
-    public EduTeacher(Long id, String name, String intro) {
-        this.id = id;
-        this.name = name;
-        this.intro = intro;
-    }
-
-    public EduTeacher(TeacherVo teacherQuery) {
-         this.name = teacherQuery.getName();
-         this.level = teacherQuery.getLevel();
-         Instant beain = LocalDateTime.parse(teacherQuery.getBegin(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                         .withZone(ZoneId.systemDefault())
-                        .withLocale(Locale.CANADA ))
-                 .toInstant(ZoneOffset.UTC);
-
-        Instant end = LocalDateTime.parse(teacherQuery.getEnd(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                        .withZone(ZoneId.systemDefault())
-                        .withLocale(Locale.CANADA ))
-                .toInstant(ZoneOffset.UTC);
-
-         this.setGmtCreate(beain);
-         this.setGmtModified(end);
-    }
-
 
 }

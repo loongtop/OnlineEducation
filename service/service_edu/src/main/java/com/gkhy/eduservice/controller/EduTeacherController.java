@@ -2,16 +2,30 @@ package com.gkhy.eduservice.controller;
 
 import com.gkhy.commonutils.Result;
 
+import com.gkhy.commonutils.JPAExt.paging.PageUtil;
 import com.gkhy.eduservice.entity.EduTeacher;
 import com.gkhy.eduservice.entity.vo.TeacherVo;
 import com.gkhy.eduservice.service.EduTeacherService;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static org.apache.commons.lang3.BooleanUtils.*;
 
 /**
  * <p>
@@ -30,7 +44,7 @@ public class EduTeacherController {
 
     //access site： http://localhost:8081/eduservice/teacher/findAll
     //Query all data in the lecturer table
-    @GetMapping("findAll")
+    @GetMapping("list")
     public Result findAllTeacher() {
         //Call the method of service to query all operations
         List<EduTeacher> list = eduTeacherService.list();
@@ -98,40 +112,52 @@ public class EduTeacherController {
 
     //Method for querying lecturers by page
     @GetMapping("page/{current}/{limit}")
-    public Result pageListTeacher(@PathVariable int current, @PathVariable int limit) {
+    public Result getTeacherListPage(@PathVariable int current, @PathVariable int limit) {
         /*
         *   current : current page
             limit : records per page
         * */
-        Pageable pageable = PageRequest.of(current, limit);
+        PageUtil<EduTeacher> teacherPageUtil = eduTeacherService.getTeacherListPage(current-1, limit);
 
-        List<EduTeacher> eduTeacherList = eduTeacherService.list(pageable);
-        long total = eduTeacherList.size();
-        return Result.success().data("total", total).data("rows",eduTeacherList);
+        List<EduTeacher> eduTeacherList = teacherPageUtil.getContent();
+        long total = teacherPageUtil.getTotalElements();
+
+        return Result.success().data("total",total).data("rows",eduTeacherList);
     }
 
     //Method of conditional query with pagination
     @PostMapping("pageTeacherCondition/{current}/{limit}")
     public Result pageTeacherCondition(@PathVariable int current, @PathVariable int limit,
                                        @RequestBody(required = false) TeacherVo teacherQuery) {
-        //Create page object
-        Pageable pageable = PageRequest.of(current, limit);
 
-        EduTeacher eduTeacher = new EduTeacher(teacherQuery);
+        String name = teacherQuery.getName();
+        Integer level = teacherQuery.getLevel();
+        Date begin = teacherQuery.getBegin();
+        Date end = teacherQuery.getEnd();
 
-       // Multi-condition combination query
+        if (!BooleanUtils.and(new Boolean[]{
+                StringUtils.hasLength(name),
+                StringUtils.hasLength(Integer.toString(level))})) {
+            return Result.fail().message("Missing parameter!");
+        }
 
-        //Create matchers, i.e. how to use query conditions
-        ExampleMatcher matcher = ExampleMatcher.matching() //build object
-                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains())
-                .withMatcher("level", ExampleMatcher.GenericPropertyMatchers.contains())
-                //Ignore attribute: whether to care. Because it is a basic type, it needs to be ignored
-                .withIgnorePaths("focus");
-        //Create instance
-        Example<EduTeacher> eduTeacherExample = Example.of(eduTeacher, matcher);
+        //Create Specification object
+        Specification<EduTeacher> specification = (root, query, cb) -> {
+            List<Predicate> list = new ArrayList<>();
+            list.add(cb.equal(root.get("name"), name));
+            list.add(cb.equal(root.get("level"), level));
+//                list.add(cb.greaterThan(root.get("gmtCreate"), begin));
+//                list.add(cb.lessThanOrEqualTo(root.get("gmtModified"), end));
 
-        List<EduTeacher> eduTeacherList = eduTeacherService.list(eduTeacherExample);
-        long total = eduTeacherList.size();
+            Predicate[] arr = new Predicate[list.size()];
+            return cb.and(list.toArray(arr));
+        };
+
+        Pageable pageable = PageRequest.of(current-1, limit);
+
+        Page<EduTeacher> eduTeacherList = eduTeacherService.findAll(specification, pageable);
+
+        long total = eduTeacherList.getTotalElements();
 
         return Result.success().data("total",total).data("rows",eduTeacherList);
    }

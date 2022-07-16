@@ -13,6 +13,7 @@
  */
 package com.gkhy.servicebase;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,9 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -37,10 +40,12 @@ import java.time.Instant;
 public abstract class DateModel implements Serializable {
 
     @CreatedDate
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
     @Column(nullable = false, updatable = false)
-    private Instant gmtCreate;
+    private LocalDateTime gmtCreate;
 
     @LastModifiedDate
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
     @Column(nullable = false)
-    private Instant gmtModified;
+    private LocalDateTime gmtModified;
 }
