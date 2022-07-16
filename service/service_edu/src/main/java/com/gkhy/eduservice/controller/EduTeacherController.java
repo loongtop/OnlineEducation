@@ -20,6 +20,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
@@ -117,12 +120,13 @@ public class EduTeacherController {
         *   current : current page
             limit : records per page
         * */
-        PageUtil<EduTeacher> teacherPageUtil = eduTeacherService.getTeacherListPage(current-1, limit);
+        Pageable pageable = PageRequest.of(current-1, limit);
 
-        List<EduTeacher> eduTeacherList = teacherPageUtil.getContent();
-        long total = teacherPageUtil.getTotalElements();
+        Page<EduTeacher> eduTeacherList = eduTeacherService.findAll(pageable);
 
-        return Result.success().data("total",total).data("rows",eduTeacherList);
+        long total = eduTeacherList.getNumberOfElements ();
+
+        return Result.success().data("total",total).data("rows",eduTeacherList.getContent());
     }
 
     //Method of conditional query with pagination
@@ -132,22 +136,31 @@ public class EduTeacherController {
 
         String name = teacherQuery.getName();
         Integer level = teacherQuery.getLevel();
-        Date begin = teacherQuery.getBegin();
-        Date end = teacherQuery.getEnd();
+        String begin = teacherQuery.getBegin();
+        String end = teacherQuery.getEnd();
 
-        if (!BooleanUtils.and(new Boolean[]{
-                StringUtils.hasLength(name),
-                StringUtils.hasLength(Integer.toString(level))})) {
-            return Result.fail().message("Missing parameter!");
-        }
+
+        LocalDateTime beginLocal = LocalDateTime.parse(begin);
+        LocalDateTime endLocal = LocalDateTime.parse(end);
 
         //Create Specification object
         Specification<EduTeacher> specification = (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
-            list.add(cb.equal(root.get("name"), name));
-            list.add(cb.equal(root.get("level"), level));
-//                list.add(cb.greaterThan(root.get("gmtCreate"), begin));
-//                list.add(cb.lessThanOrEqualTo(root.get("gmtModified"), end));
+            if ( StringUtils.hasLength(name)) {
+                list.add(cb.equal(root.get("name"), name));
+            }
+
+            if (level != null) {
+                list.add(cb.equal(root.get("level"), level));
+            }
+
+            if (StringUtils.hasLength(begin)) {
+                list.add(cb.greaterThanOrEqualTo(root.get("gmtCreate"), beginLocal));
+            }
+
+            if (StringUtils.hasLength(end)) {
+                list.add(cb.lessThanOrEqualTo(root.get("gmtModified"), endLocal));
+            }
 
             Predicate[] arr = new Predicate[list.size()];
             return cb.and(list.toArray(arr));
@@ -157,9 +170,9 @@ public class EduTeacherController {
 
         Page<EduTeacher> eduTeacherList = eduTeacherService.findAll(specification, pageable);
 
-        long total = eduTeacherList.getTotalElements();
+        long total = eduTeacherList.getNumberOfElements ();
 
-        return Result.success().data("total",total).data("rows",eduTeacherList);
+        return Result.success().data("total",total).data("rows",eduTeacherList.getContent());
    }
 }
 

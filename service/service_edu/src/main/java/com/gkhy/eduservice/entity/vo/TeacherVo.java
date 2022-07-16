@@ -13,7 +13,7 @@ public class TeacherVo {
 
     private Integer level;
 
-    private Date begin;
+    private String begin;
 
-    private Date end;
+    private String end;
 }

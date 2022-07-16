@@ -34,6 +34,8 @@ public interface EduTeacherService {
 
     List<EduTeacher> findAll(Specification<EduTeacher> spec);
 
+    Page<EduTeacher> findAll(Pageable pageable);
+
     Page<EduTeacher> findAll(Specification<EduTeacher> spec, Pageable pageable);
 
     List<EduTeacher> findAll(Specification<EduTeacher> spec, Sort sort);

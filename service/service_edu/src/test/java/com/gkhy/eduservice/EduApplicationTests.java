@@ -17,6 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -85,6 +86,34 @@ class EduApplicationTests {
     }
 
     @Test
+    public void findByTimeLike() {
+
+        String begin = "2017-10-30T02:18:46.000";
+        String end = "2020-10-30T02:18:46.000";
+        LocalDateTime beginLocal = LocalDateTime.parse(begin);
+        LocalDateTime endLocal = LocalDateTime.parse(end);
+
+        //Create Specification object
+        Specification<EduTeacher> specification = (root, query, cb) -> {
+            List<Predicate> list = new ArrayList<>();
+            list.add(cb.equal(root.get("name"), "张三"));
+
+            list.add(cb.greaterThanOrEqualTo(root.get("gmtCreate"), beginLocal));
+            list.add(cb.lessThanOrEqualTo(root.get("gmtModified"), endLocal));
+
+            Predicate[] arr = new Predicate[list.size()];
+            return cb.and(list.toArray(arr));
+        };
+
+        Pageable pageable = PageRequest.of(0, 2);
+
+        Page<EduTeacher> eduTeacherList = eduTeacherService.findAll(specification, pageable);
+
+        for (EduTeacher user : eduTeacherList) System.out.println(user);
+
+    }
+
+    @Test
     public void pageable() {
         Specification<EduTeacher> spe = (root, query, cb) -> cb.between(root.get("id"), 47, 51);
         Pageable pageable = PageRequest.of(0, 5);
@@ -110,4 +139,5 @@ class EduApplicationTests {
         Page<EduTeacher> list = eduTeacherService.findAll(spe, pageable);
         for (EduTeacher user : list) System.out.println(user);
     }
+
 }

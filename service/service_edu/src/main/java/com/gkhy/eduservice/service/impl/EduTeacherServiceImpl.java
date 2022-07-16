@@ -93,4 +93,8 @@ public class EduTeacherServiceImpl implements EduTeacherService {
         return eduTeacherRepository.findAll(spec, sort);
     }
 
+    @Override
+    public Page<EduTeacher> findAll(Pageable pageable) {
+        return eduTeacherRepository.findAll(pageable);
+    }
 }
