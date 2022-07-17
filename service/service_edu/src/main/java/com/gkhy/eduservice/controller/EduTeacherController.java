@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.Predicate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.apache.commons.lang3.BooleanUtils.and;
 
 /**
  * <p>
@@ -129,15 +132,15 @@ public class EduTeacherController {
         String begin = teacherQuery.getBegin();
         String end = teacherQuery.getEnd();
 
-
-        LocalDateTime beginLocal = LocalDateTime.parse(begin);
-        LocalDateTime endLocal = LocalDateTime.parse(end);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime beginLocal = LocalDateTime.parse(begin,df);
+        LocalDateTime endLocal = LocalDateTime.parse(end,df);
 
         //Create Specification object
         Specification<EduTeacher> specification = (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
-            if ( StringUtils.hasLength(name)) {
-                list.add(cb.equal(root.get("name"), name));
+            if ((name != null) && ( StringUtils.hasLength(name))) {
+                list.add(cb.like(root.get("name"), "%"+ name +"%"));
             }
 
             if (level != null) {
