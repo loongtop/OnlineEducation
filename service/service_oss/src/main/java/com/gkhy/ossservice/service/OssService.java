@@ -1,8 +1,11 @@
 package com.gkhy.ossservice.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.codec.multipart.FilePart;
+import reactor.core.publisher.Mono;
+
+import java.net.URL;
 
 public interface OssService {
 
-    String uploadFileAvatar(MultipartFile file);
+    Mono<URL> uploadFile(FilePart file);
 }

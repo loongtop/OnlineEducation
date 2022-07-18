@@ -1,6 +1,6 @@
 package com.gkhy.servicebase.config;
 
-import com.google.common.base.Predicates;
+//import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -23,11 +23,12 @@ public class SwaggerConfig {
                 .apiInfo(webApiInfo())
                 .select()
 //                .apis(RequestHandlerSelectors.basePackage("com.gkhy."))
-                .paths(Predicates.not(PathSelectors.regex("/admin/.*")))
-                .paths(Predicates.not(PathSelectors.regex("/error.*")))
+//                .paths(Predicates.not(PathSelectors.regex("/admin/.*")))
+//                .paths(Predicates.not(PathSelectors.regex("/error.*")))
+                .paths(PathSelectors.ant("/admin/.*"))
+                .paths(PathSelectors.ant("/error.*"))
 //                .paths(Predicates.not(PathSelectors.any()))
                 .build();
-
     }
 
     private ApiInfo webApiInfo(){
