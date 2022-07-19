@@ -6,17 +6,18 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import java.util.Map;
 
 public class ExcelListener extends AnalysisEventListener<DemoData> {
-    //一行一行读取excel内容
+    //Read excel content line by line
     @Override
     public void invoke(DemoData data, AnalysisContext analysisContext) {
         System.out.println("****"+data);
     }
-    //读取表头内容
+
+    //read header content
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
-        System.out.println("表头："+headMap);
+        System.out.println("Head："+headMap);
     }
-    //读取完成之后
+    //After reading is complete
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) { }
 }
