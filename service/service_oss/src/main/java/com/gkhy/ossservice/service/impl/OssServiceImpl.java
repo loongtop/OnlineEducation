@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -70,14 +71,15 @@ public class OssServiceImpl implements OssService {
      * @param bucketName
      * @param subdirectory optional
      * @param fileName
-     * @return
+     * @return BlobId
      */
     private BlobId constructBlobId(String bucketName,
                                    @Nullable String subdirectory,
                                    String fileName) {
+        String filePath = new DateTime().toString("yyyy/MM/dd") + "/" + fileName;
         return Optional.ofNullable(subdirectory)
-                .map(s -> BlobId.of(bucketName, subdirectory + "/" + fileName))
-                .orElse(BlobId.of(bucketName, fileName));
+                .map(s -> BlobId.of(bucketName, subdirectory + "/" + filePath))
+                .orElse(BlobId.of(bucketName, filePath));
     }
 
     /**
