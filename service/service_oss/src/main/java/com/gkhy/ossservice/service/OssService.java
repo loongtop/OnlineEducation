@@ -1,11 +1,12 @@
 package com.gkhy.ossservice.service;
 
-import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
 import java.net.URL;
 
 public interface OssService {
 
-    Mono<URL> uploadFile(FilePart file);
+    URL uploadFile(MultipartFile file) throws IOException;
 }
