@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface EduVideoRepository extends
         JpaSpecificationExecutor<EduVideo>,
         JpaRepository<EduVideo, String> {
-    void deleteAllById(String courseId);
 }
