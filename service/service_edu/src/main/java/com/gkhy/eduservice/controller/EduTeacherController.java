@@ -80,7 +80,8 @@ public class EduTeacherController {
             eduTeacherService.update(eduTeacherIn);
             return Result.success().data("teacher", eduTeacher);
         }
-        return Result.fail();
+        String message = "Did not find Teacher with ID %s";
+        return Result.fail().data("Teacher", String.format(message, id));
     }
 
     //logically delete a teacher (IsDeleted = true)
@@ -127,41 +128,7 @@ public class EduTeacherController {
     public Result pageTeacherCondition(@PathVariable int current, @PathVariable int limit,
                                        @RequestBody(required = false) TeacherVo teacherQuery) {
 
-        String name = teacherQuery.getName();
-        Integer level = teacherQuery.getLevel();
-        String begin = teacherQuery.getBegin();
-        String end = teacherQuery.getEnd();
-
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime beginLocal = LocalDateTime.parse(begin,df);
-        LocalDateTime endLocal = LocalDateTime.parse(end,df);
-
-        //Create Specification object
-        Specification<EduTeacher> specification = (root, query, cb) -> {
-            List<Predicate> list = new ArrayList<>();
-            if ((name != null) && ( StringUtils.hasLength(name))) {
-                list.add(cb.like(root.get("name"), "%"+ name +"%"));
-            }
-
-            if (level != null) {
-                list.add(cb.equal(root.get("level"), level));
-            }
-
-            if (StringUtils.hasLength(begin)) {
-                list.add(cb.greaterThanOrEqualTo(root.get("gmtCreate"), beginLocal));
-            }
-
-            if (StringUtils.hasLength(end)) {
-                list.add(cb.lessThanOrEqualTo(root.get("gmtModified"), endLocal));
-            }
-
-            Predicate[] arr = new Predicate[list.size()];
-            return cb.and(list.toArray(arr));
-        };
-
-        Pageable pageable = PageRequest.of(current-1, limit);
-
-        Page<EduTeacher> eduTeacherList = eduTeacherService.findAll(specification, pageable);
+        Page<EduTeacher> eduTeacherList = eduTeacherService.findAll(teacherQuery, current, limit);
 
         long total = eduTeacherList.getNumberOfElements ();
 

@@ -30,13 +30,13 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
         EduSubject existOneSubject = this.existOneSubject(eduSubjectService, subjectData.getOneSubjectName());
         if(existOneSubject == null) {  //if There is no same first-level classification, add it
             existOneSubject = new EduSubject();
-            existOneSubject.setParentId("0");
+            existOneSubject.setParentId(0L);
             existOneSubject.setTitle(subjectData.getOneSubjectName());//first class name
             eduSubjectService.save(existOneSubject);
         }
 
         //Get the first-level classification id value
-        String pid = existOneSubject.getId();
+        Long pid = existOneSubject.getId();
 
         //Add secondary category
         //Determine whether the secondary classification is repeated
@@ -60,7 +60,7 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     }
 
     //Judging that the secondary classification cannot be added repeatedly
-    private EduSubject existTwoSubject(EduSubjectService subjectService,String name,String pid) {
+    private EduSubject existTwoSubject(EduSubjectService subjectService, String name, Long pid) {
 //        QueryWrapper<EduSubject> wrapper = new QueryWrapper<>();
 //        wrapper.eq("title",name);
 //        wrapper.eq("parent_id",pid);

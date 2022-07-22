@@ -11,6 +11,7 @@ import java.util.Locale;
 import com.gkhy.eduservice.entity.vo.TeacherVo;
 import com.gkhy.servicebase.DateModel;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,9 +24,10 @@ import javax.validation.constraints.Size;
  * @author leo
  * @since 2022-07-11
  */
+
+@Accessors(chain = true)
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

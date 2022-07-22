@@ -1,6 +1,7 @@
 package com.gkhy.eduservice.service;
 
 import com.gkhy.eduservice.entity.EduTeacher;
+import com.gkhy.eduservice.entity.vo.TeacherVo;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,4 +37,6 @@ public interface EduTeacherService {
     Page<EduTeacher> findAll(Specification<EduTeacher> spec, Pageable pageable);
 
     List<EduTeacher> findAll(Specification<EduTeacher> spec, Sort sort);
+
+    Page<EduTeacher> findAll(TeacherVo teacherQuery, int current, int limit);
 }

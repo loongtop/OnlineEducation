@@ -8,7 +8,7 @@ import java.util.List;
 //primary classification
 @Data
 public class OneSubject {
-    private String id;
+    private Long id;
     private String title;
 
     //A primary category has multiple secondary categories

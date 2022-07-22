@@ -1,20 +1,19 @@
 package com.gkhy.eduservice.entity;
 
-import com.gkhy.servicebase.DateModel;
-
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import com.gkhy.servicebase.DateModel;
+
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * <p>
- * Course
+ * course
  * </p>
  *
  * @author leo
- * @since 2022-07-13
+ * @since 2022-07-20
  */
 
 @Accessors(chain = true)
@@ -24,16 +23,20 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table
-public class EduCourseDescription extends DateModel implements Serializable {
+public class EduChapter extends DateModel{
 
-    private static final long serialVersionUID = 730107770905520088L;
+    private static final long serialVersionUID = -6662001959139322064L;
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "CourseDescription_sequence"
+            generator = "Chapter_sequence"
     )
     private String id;
 
-    private String description;
+    private String courseId;
+
+    private String title;
+
+    private Integer sort;
 
 }

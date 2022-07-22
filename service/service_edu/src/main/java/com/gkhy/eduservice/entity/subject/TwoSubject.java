@@ -5,6 +5,6 @@ import lombok.Data;
 //Secondary classification
 @Data
 public class TwoSubject {
-    private String id;
+    private Long id;
     private String title;
 }

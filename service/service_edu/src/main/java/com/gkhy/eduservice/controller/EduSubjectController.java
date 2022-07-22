@@ -9,20 +9,31 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * <p>
+ * EduSubject controller
+ * </p>
+ *
+ * @author leo
+ * @since 2022-07-11
+ */
+
 @RestController
 @RequestMapping("/eduservice/subject")
 @CrossOrigin
-public class EduSubjectConntroller {
+public class EduSubjectController {
+
     @Autowired
     private EduSubjectService eduSubjectService;
 
-    @PostMapping("add")
+    @PostMapping("addSubject")
     public Result addSubject(MultipartFile file) {
         eduSubjectService.saveSubject(file, eduSubjectService);
         return Result.success();
     }
 
-    @GetMapping("list")
+    @GetMapping("getAllSubject")
+    // first class category (Tree)
     public Result list() {
         List<OneSubject> list = eduSubjectService.getAllOneTwoSubject();
         return Result.success().data("list", list);
