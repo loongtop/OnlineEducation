@@ -70,7 +70,6 @@ public class EduTeacherController {
         return Result.fail();
     }
 
-
     //Teacher modification function
     @PostMapping("update")
     public Result updateTeacher(@RequestBody EduTeacher eduTeacherIn) {

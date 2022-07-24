@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-
 @Configuration
-@ComponentScan(basePackages = "com.gkhy")
 @SpringBootApplication
+@ComponentScan(basePackages = "com.gkhy")
 public class EduApplication {
 
     public static void main(String[] args) {

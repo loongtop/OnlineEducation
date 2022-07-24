@@ -2,7 +2,7 @@ package com.gkhy.eduservice;
 
 import com.gkhy.eduservice.entity.EduTeacher;
 import com.gkhy.eduservice.service.impl.EduTeacherServiceImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
