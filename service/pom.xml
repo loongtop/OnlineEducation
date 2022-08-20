@@ -12,14 +12,15 @@
     <artifactId>service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>service_edu</module>
-        <module>service_vod</module>
         <module>service_oss</module>
         <module>service_cms</module>
         <module>service_order</module>
-        <module>service_ucentre</module>
         <module>service_message</module>
-        <module>servic_acl</module>
+        <module>service_acl</module>
+        <module>service_education</module>
+        <module>service_usercentre</module>
+        <module>service_video</module>
+
     </modules>
 
     <dependencies>
