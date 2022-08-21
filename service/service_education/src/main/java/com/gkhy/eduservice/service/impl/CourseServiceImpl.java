@@ -14,6 +14,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * <p>
  * EduCourse Service Implementation Class
@@ -61,13 +63,6 @@ public final class CourseServiceImpl extends
     }
 
     @Override
-    public void updateCourseInfo(CourseInfoVo courseInfoVo) {
-        CourseEntity eduCourse = new CourseEntity();
-        BeanUtils.copyProperties(eduCourse, courseInfoVo);
-        this.save(eduCourse);
-    }
-
-    @Override
     public void removeById(Long courseId) {
         videoService.removeById(courseId);
 
@@ -84,16 +79,25 @@ public final class CourseServiceImpl extends
 
     @Override
     public CourseInfoVo getCourseInfo(Long courseId) {
-        return null;
+
+        Optional<CourseEntity> courseEntity = this.findById(courseId);
+        if (courseEntity.isEmpty()) {
+            System.out.println("courseDescription");
+        }
+        //1. Query course information
+        CourseInfoVo courseInfoVo = new CourseInfoVo();
+        BeanUtils.copyProperties(courseEntity,courseInfoVo);
+
+        //2. Query course description information
+        Optional<CourseDescriptionEntity> courseDescription = courseDescriptionService.findById(courseId);
+        if (courseDescription.isEmpty()) {
+            System.out.println("courseDescription");
+        }
+
+        courseInfoVo.setDescription(courseDescription.get().getDescription());
+        return courseInfoVo;
     }
 
-    @Override
-    public void updateById(CourseEntity eduCourse) {
 
-    }
 
-    @Override
-    public void removeCourse(Long courseId) {
-
-    }
 }

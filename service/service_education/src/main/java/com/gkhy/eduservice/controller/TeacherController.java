@@ -1,6 +1,6 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.servicebase.utils.ItemFound;
 
 import com.gkhy.eduservice.entity.TeacherEntity;
@@ -25,14 +25,17 @@ import java.util.Optional;
  * @since 2022-07-11
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/eduservice/teacher")
 public final class TeacherController {
 
     private final TeacherService teacherService;
     @Autowired
-    public TeacherController(TeacherService eduTeacherService) {
-        this.teacherService = eduTeacherService;
+    public TeacherController(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
+
+    @Autowired
 
     //Query all data in the lecturer table
     @GetMapping("all")
@@ -57,17 +60,17 @@ public final class TeacherController {
             return ItemFound.fail();
         }
 
-        return Result.success().data("teacher", teacher.get());
+        return Result.success().data("teacher", teacher);
     }
 
     //Teacher modification function
-    @PostMapping("update")
+    @PostMapping("update/{id}")
     public Result updateTeacher(@PathVariable Long id, @RequestBody TeacherEntity teacherIn) {
         Optional<TeacherEntity> teacher = teacherService.findById(id);
         if (teacher.isEmpty()) return ItemFound.fail();
 
-        teacherService.save(teacherIn);
-        return Result.success().data("teacher", teacherIn);
+        teacherService.update(teacherIn, teacher.get());
+        return Result.success().data("teacher", teacher);
     }
 
     //logically delete a teacher (IsDeleted = true)

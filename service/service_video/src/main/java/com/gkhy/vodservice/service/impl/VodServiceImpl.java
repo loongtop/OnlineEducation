@@ -1,13 +1,12 @@
 package com.gkhy.vodservice.service.impl;
 
 
-import com.gkhy.servicebase.exceptionhandler.EducationException;
+import com.gkhy.servicebase.exceptionhandler.AcademyException;
 import com.gkhy.vodservice.service.VodService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +24,12 @@ public class VodServiceImpl implements VodService {
     }
 
     @Override
-    public void removeMoreAlyVideo(List<String> videoIdList) {
+    public void removeMoreAlyVideo(List<Long> videoIdList) {
         try {
 
         }catch(Exception e) {
             e.printStackTrace();
-            throw new EducationException(20001,"fail to delete the video!");
+            throw new AcademyException(20001,"fail to delete the video!");
         }
     }
 

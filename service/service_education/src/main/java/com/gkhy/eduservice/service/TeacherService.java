@@ -33,4 +33,6 @@ public interface TeacherService {
     Page<TeacherEntity> findAll(TeacherVo teacherQuery, int current, int limit);
 
     void save(TeacherEntity eduTeacher);
+
+    void update(Object teacherIn, TeacherEntity teacher);
 }

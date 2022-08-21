@@ -1,6 +1,5 @@
-package com.gkhy.commonutils.result;
+package com.gkhy.servicebase.result;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -10,7 +9,7 @@ import java.util.Map;
 
 /**
  * return value
- * This class that returns the result uniformly for the whole project
+ * This class that returns the result uniformly for front end
  * @author leo
  * @date 2022-06-02
  */
@@ -20,30 +19,33 @@ import java.util.Map;
 @Component
 public final class Result extends HashMap<String, Object> {
 
+    private static final int SUCCESS = 20000;
+    private static final int ERROR = 20001;
+
     private static final long serialVersionUID = -2666368596113433194L;
 
-    private Boolean success;
+    private boolean fail;
     private Integer code;
     private String message;
 
     public static Result success() {
         Result r = new Result();
-        r.setSuccess(true);
-        r.setCode(ResultCode.SUCCESS);
+        r.setFail(false);
+        r.setCode(SUCCESS);
         r.setMessage("Success");
         return r;
     }
 
     public static Result fail() {
         Result r = new Result();
-        r.setSuccess(false);
-        r.setCode(ResultCode.ERROR);
+        r.setFail(true);
+        r.setCode(ERROR);
         r.setMessage("Failure");
         return r;
     }
 
     public Result success(Boolean success){
-        this.setSuccess(success);
+        this.setFail(success);
         return this;
     }
 

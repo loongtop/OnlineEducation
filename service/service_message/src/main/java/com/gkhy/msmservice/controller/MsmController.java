@@ -1,6 +1,6 @@
 package com.gkhy.msmservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.msmservice.service.MsmService;
 import com.gkhy.msmservice.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;

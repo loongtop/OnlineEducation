@@ -5,7 +5,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.gkhy.eduservice.entity.SubjectEntity;
 import com.gkhy.eduservice.entity.excel.SubjectData;
 import com.gkhy.eduservice.service.SubjectService;
-import com.gkhy.servicebase.exceptionhandler.EducationException;
+import com.gkhy.servicebase.exceptionhandler.AcademyException;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;
@@ -29,7 +29,7 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     @Override
     public void invoke(SubjectData subjectData, AnalysisContext analysisContext) {
         if(subjectData == null) {
-            throw new EducationException(20001,"file data is empty");
+            throw new AcademyException(20001,"file data is empty");
         }
 
         //Read line by line, there are two values for each read, the first value is first-level classification, and the second value is second-level classification

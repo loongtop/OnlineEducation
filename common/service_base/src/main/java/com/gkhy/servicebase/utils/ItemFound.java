@@ -1,6 +1,6 @@
 package com.gkhy.servicebase.utils;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.servicebase.error.AcademyError;
 import lombok.experimental.UtilityClass;
 

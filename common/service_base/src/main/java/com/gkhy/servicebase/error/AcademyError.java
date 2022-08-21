@@ -1,6 +1,5 @@
 package com.gkhy.servicebase.error;
 
-import com.gkhy.commonutils.result.IAcademyError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,8 +20,6 @@ import lombok.Getter;
 public enum AcademyError implements IAcademyError {
 
 //    UPLOAD_FILE_ERROR(20010,"File upload failed"),
-//    FILE_EMPTY(20011, "The file is empty"),
-//    DELETE_ERROR(20012,"Delete failed"),
 //    VALID_CODE_SEND_FAIL(20013,"Send SMS verification code failed"),
 //    LOGIN_ERROR(20014,"Login failed, wrong username or password!"),
 //    REGISTER_ERROR(20015,"Registration failed"),
@@ -31,11 +28,15 @@ public enum AcademyError implements IAcademyError {
 //    REMOTE_CALL_MEMBER(20018,"Failed to call member module remotely"),
 //    WECHAT_PAY_FAIL(20019,"WeChat payment failed"),
 //    PARAMS_ERROR(20020,"Parameter verification failed"),
-    ITEM_NOT_FOUND_ERROR(20021,"Item was not find in the database!"),
+//    SAVE_ERROR(20003,"Add failed"),
+//    UPDATE_ERROR(20004,"Update failed"),
+//    DATA_NO_EXIST(20005, "Data does not exist"),
+    ITEM_NOT_FOUND_ERROR(90001,"Item was not find in the database!"),
+    DELETE_ERROR(20012,"Delete failed"),
     ;
 
     private static final long serialVersionUID = -6662001959139322064L;
 
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 }

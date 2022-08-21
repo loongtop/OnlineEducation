@@ -1,6 +1,6 @@
 package com.gkhy.ossservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.ossservice.config.UploadConfig;
 import com.gkhy.ossservice.service.OssService;
 import lombok.SneakyThrows;

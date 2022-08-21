@@ -1,6 +1,6 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

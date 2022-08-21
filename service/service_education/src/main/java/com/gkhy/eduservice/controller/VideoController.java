@@ -1,10 +1,16 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.eduservice.entity.form.VideoForm;
+import com.gkhy.eduservice.error.EducationError;
+import com.gkhy.eduservice.feign.VideoFeignClient;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.eduservice.entity.VideoEntity;
 import com.gkhy.eduservice.service.VideoService;
+import com.gkhy.servicebase.utils.ItemFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * <p>
@@ -20,26 +26,56 @@ import org.springframework.web.bind.annotation.*;
 public final class VideoController {
 
     private final VideoService videoService;
+    private final VideoFeignClient videoFeignClient;
 
     @Autowired
-    public VideoController(VideoService videoService) {
+    public VideoController(VideoService videoService, VideoFeignClient videoFeignClient) {
         this.videoService = videoService;
+        this.videoFeignClient = videoFeignClient;
     }
 
-    @PostMapping("addVideo")
-    public Result addVideo(@RequestBody VideoEntity eduVideo) {
-        videoService.save(eduVideo);
+    @PostMapping("add")
+    public Result addVideo(@RequestBody VideoEntity videoEntity) {
+        videoService.save(videoEntity);
         return Result.success();
     }
 
     // TODO
     //  when deleting a subsection, delete the video inside at the same time
-    @DeleteMapping("{id}")
+    @DeleteMapping("delete/{id}")
     public Result deleteVideo(@PathVariable Long id) {
+        Optional<VideoEntity> video = videoService.findById(id);
+        if (video.isEmpty()) return ItemFound.fail();
+
+        Long videoSourceId = video.get().getVideoSourceId();
+        Result result = videoFeignClient.removeById(videoSourceId);
+
+        if(result.isFail()){
+            return Result.fail()
+                    .code(EducationError.DELETE_ERROR.getCode())
+                    .message(EducationError.DELETE_ERROR.getMessage()+"Ali yun Video ID " + videoSourceId);
+        }
+
         videoService.removeById(id);
         return Result.success();
     }
 
-    //修改小节 TODO
+    @PutMapping("update")
+    public Result updateVideo(@RequestBody VideoForm videoForm){
+
+        VideoEntity videoEntity = new VideoEntity();
+        videoService.update(videoForm, videoEntity);
+        return  Result.success();
+    }
+
+    @GetMapping("get/{id}")
+    public Result getVideoById(@PathVariable Long id){
+
+        Optional<VideoEntity> video = videoService.findById(id);
+        if (video.isEmpty()) return ItemFound.fail();
+
+        return Result.success().data("item", video);
+    }
+
 }
 

@@ -1,9 +1,9 @@
-package com.gkhy.commonutils.result;
+package com.gkhy.servicebase.error;
 
 import java.io.Serializable;
 
 /***
- * Error code and error message definition class
+ * Error code and error message definition interface
  * @author leo
  */
 

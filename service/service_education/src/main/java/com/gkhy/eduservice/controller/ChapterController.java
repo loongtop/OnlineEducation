@@ -1,10 +1,12 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.eduservice.entity.form.ChapterForm;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.eduservice.entity.ChapterEntity;
 import com.gkhy.eduservice.entity.chapter.ChapterVo;
 import com.gkhy.eduservice.service.ChapterService;
 import com.gkhy.servicebase.utils.ItemFound;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,13 +39,16 @@ public final class ChapterController {
         return Result.success().data("allChapterVideo", list);
     }
 
-    @PostMapping("addChapter")
-    public Result addChapter(@RequestBody ChapterEntity eduChapter) {
-        eduChapterService.save(eduChapter);
+    @PostMapping("add")
+    public Result addChapter(@RequestBody ChapterForm chapterForm) {
+        ChapterEntity chapter = new ChapterEntity();
+        BeanUtils.copyProperties(chapterForm,chapter);
+
+        eduChapterService.save(chapter);
         return Result.success();
     }
 
-    @GetMapping("get/{chapterId}")
+    @GetMapping("getChapterInfo/{chapterId}")
     public Result getChapterInfo(@PathVariable Long chapterId) {
         Optional<ChapterEntity> chapterEntity = eduChapterService.findById(chapterId);
         if (chapterEntity.isEmpty()) {
@@ -54,20 +59,22 @@ public final class ChapterController {
     }
 
     @PostMapping("updateChapter")
-    public Result updateChapter(@RequestBody ChapterEntity eduChapterIn) {
-        Long id = eduChapterIn.getId();
-        Optional<ChapterEntity> eduChapter = eduChapterService.findById(id);
-        if (eduChapter.isPresent()) {
-            eduChapterService.save(eduChapterIn);
-            return Result.success().data("Chapter", eduChapter);
-        }
-        String message = "Did not find Chapter with ID %s";
-        return Result.fail().data("Chapter", String.format(message, id));
+    public Result updateChapter(@RequestBody ChapterForm chapterForm) {
+        Long id = chapterForm.getId();
+        Optional<ChapterEntity> chapter = eduChapterService.findById(id);
+        if (chapter.isEmpty()) return ItemFound.fail();
+
+        BeanUtils.copyProperties(chapterForm,chapter);
+        eduChapterService.save(chapter.get());
+
+        return Result.success().data("item", chapter);
     }
 
     @DeleteMapping("{chapterId}")
     public Result deleteChapter(@PathVariable Long chapterId) {
-        eduChapterService.deleteById(chapterId);
+        Optional<ChapterEntity> chapter = eduChapterService.findById(chapterId);
+        if (chapter.isEmpty()) return ItemFound.fail();
+
         return Result.success();
     }
 }

@@ -1,6 +1,6 @@
 package com.gkhy.servicebase.exceptionhandler;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,9 +26,9 @@ public class GlobalExceptionHandler {
     }
 
     //custom exception
-    @ExceptionHandler(EducationException.class)
+    @ExceptionHandler(AcademyException.class)
     @ResponseBody
-    public Result error(EducationException e) {
+    public Result error(AcademyException e) {
         log.error(e.getMessage());
         e.printStackTrace();
 

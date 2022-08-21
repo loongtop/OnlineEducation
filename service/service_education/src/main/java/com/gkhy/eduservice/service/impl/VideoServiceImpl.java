@@ -1,6 +1,7 @@
 package com.gkhy.eduservice.service.impl;
 
 import com.gkhy.eduservice.entity.VideoEntity;
+import com.gkhy.eduservice.entity.form.VideoForm;
 import com.gkhy.eduservice.repository.VideoRepository;
 import com.gkhy.eduservice.service.VideoService;
 import com.gkhy.servicebase.service.ServiceImpl;
@@ -33,4 +34,5 @@ public final class VideoServiceImpl extends
                 (root, query, cb) -> cb.equal(root.get("chapterId"), chapterId);
         return this.count(specification);
     }
+
 }

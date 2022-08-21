@@ -1,4 +1,4 @@
-package com.gkhy.commonutils.result;
+package com.gkhy.servicebase.result;
 
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;

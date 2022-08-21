@@ -1,6 +1,5 @@
 package com.gkhy.eduservice.entity;
 
-import java.io.Serializable;
 import com.gkhy.servicebase.DateModel;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -23,7 +22,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table(name= "edu_teacher")
 public class TeacherEntity extends DateModel {
 
     private static final long serialVersionUID = 1065977948055204551L;

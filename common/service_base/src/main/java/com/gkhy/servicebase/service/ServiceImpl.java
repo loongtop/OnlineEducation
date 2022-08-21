@@ -1,6 +1,7 @@
 package com.gkhy.servicebase.service;
 
-import com.gkhy.servicebase.service.repository.IRepositoryBase;
+import com.gkhy.servicebase.service.repository.IRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public abstract class ServiceImpl<T, E, Repository extends IRepositoryBase<T, E>> {
+public abstract class ServiceImpl<T, E extends Number, Repository extends IRepository<T, E>> {
 
     protected Repository iRepository;
 
@@ -121,5 +122,10 @@ public abstract class ServiceImpl<T, E, Repository extends IRepositoryBase<T, E>
 
     public void saveAll(Iterable<T> entities) {
         iRepository.saveAllAndFlush(entities);
+    }
+
+    public void update(Object o, T entity) {
+        BeanUtils.copyProperties(o, entity);
+        iRepository.saveAndFlush(entity);
     }
 }

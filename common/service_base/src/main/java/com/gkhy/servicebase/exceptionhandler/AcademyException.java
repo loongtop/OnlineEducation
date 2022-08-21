@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EducationException extends RuntimeException {
+public class AcademyException extends RuntimeException {
     private Integer code;
     private String msg;
 }

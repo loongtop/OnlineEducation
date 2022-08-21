@@ -1,6 +1,6 @@
 package com.gkhy.cmsservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.cmsservice.entity.CrmBanner;
 import com.gkhy.cmsservice.service.CrmBannerService;
 import io.swagger.annotations.ApiOperation;

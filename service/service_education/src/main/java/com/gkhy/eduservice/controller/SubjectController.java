@@ -1,6 +1,7 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.exceptionhandler.AcademyException;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.eduservice.entity.subject.MainSubject;
 import com.gkhy.eduservice.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -25,12 +27,16 @@ public final class SubjectController {
 
     private final SubjectService subjectService;
     @Autowired
-    public SubjectController(SubjectService eduSubjectService) {
-        this.subjectService = eduSubjectService;
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
     }
 
     @PostMapping("add")
     public Result addSubject(MultipartFile file) {
+        file = Optional.ofNullable(file)
+                .orElseThrow(AcademyException::new);
+
+        //get the Excel file
         subjectService.saveSubject(file, subjectService);
         return Result.success();
     }
@@ -41,4 +47,5 @@ public final class SubjectController {
         List<MainSubject> list = subjectService.getAllOneTwoSubject();
         return Result.success().data("list", list);
     }
+
 }

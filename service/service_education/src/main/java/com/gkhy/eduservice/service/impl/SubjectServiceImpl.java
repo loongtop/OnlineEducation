@@ -39,12 +39,12 @@ public final class SubjectServiceImpl extends
     }
 
     @Override
-    public void saveSubject(MultipartFile file, SubjectService eduSubjectService) {
+    public void saveSubject(MultipartFile file, SubjectService subjectService) {
         try {
             //file input stream
             InputStream in = file.getInputStream();
             //call method to read
-            EasyExcel.read(in, SubjectData.class,new SubjectExcelListener(eduSubjectService)).sheet().doRead();
+            EasyExcel.read(in, SubjectData.class,new SubjectExcelListener(subjectService)).sheet().doRead();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -66,11 +66,12 @@ public final class SubjectServiceImpl extends
         List<MainSubject> finalSubjectList = new ArrayList<>();
 
         for(SubjectEntity eduSubject1: oneSubjectList) {
-            MainSubject oneSubject = new MainSubject();
-//            oneSubject.setId(eduSubject.getId());
-//            oneSubject.setTitle(eduSubject.getTitle());
-            BeanUtils.copyProperties(eduSubject1,oneSubject);
-            finalSubjectList.add(oneSubject);
+            MainSubject mainSubject = new MainSubject();
+            mainSubject.setId(eduSubject1.getId());
+            mainSubject.setTitle(eduSubject1.getTitle());
+
+            BeanUtils.copyProperties(eduSubject1,mainSubject);
+            finalSubjectList.add(mainSubject);
 
             List<SecondarySubject> twoFinalSubjectList = new ArrayList<>();
             for(SubjectEntity eduSubject2: twoSubjectList) {
@@ -81,7 +82,7 @@ public final class SubjectServiceImpl extends
                     twoFinalSubjectList.add(twoSubject);
                 }
             }
-            oneSubject.setChildren(twoFinalSubjectList);
+            mainSubject.setChildren(twoFinalSubjectList);
         }
         return finalSubjectList;
     }

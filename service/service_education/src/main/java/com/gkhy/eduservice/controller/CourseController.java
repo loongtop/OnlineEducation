@@ -1,18 +1,21 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.eduservice.entity.enums.CourseStatus;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.eduservice.entity.CourseEntity;
 import com.gkhy.eduservice.entity.vo.CourseInfoVo;
 import com.gkhy.eduservice.entity.vo.CoursePublishVo;
 import com.gkhy.eduservice.service.CourseService;
+import com.gkhy.servicebase.utils.ItemFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
- * Course Front Controller
+ * Course Controller
  * </p>
  *
  * @author leo
@@ -24,7 +27,6 @@ import java.util.List;
 public final class CourseController {
 
     private final CourseService courseService;
-
     @Autowired
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
@@ -37,7 +39,7 @@ public final class CourseController {
         return Result.success().data("list",list);
     }
 
-    @PostMapping("addCourseInfo")
+    @PostMapping("add")
     public Result addCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
 
         Long id = courseService.saveCourseInfo(courseInfoVo);
@@ -46,13 +48,20 @@ public final class CourseController {
 
     @GetMapping("getCourseInfo/{courseId}")
     public Result getCourseInfo(@PathVariable Long courseId) {
+        boolean exists = courseService.existsById(courseId);
+        if (exists) return ItemFound.fail();
+
         CourseInfoVo courseInfoVo = courseService.getCourseInfo(courseId);
         return Result.success().data("courseInfoVo",courseInfoVo);
     }
 
     @PostMapping("updateCourseInfo")
     public Result updateCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
-        courseService.updateCourseInfo(courseInfoVo);
+        Long id = courseInfoVo.getId();
+        Optional<CourseEntity> course = courseService.findById(id);
+        if (course.isEmpty()) return ItemFound.fail();
+
+        courseService.update(courseInfoVo, course.get());
         return Result.success();
     }
 
@@ -67,16 +76,16 @@ public final class CourseController {
     public Result publishCourse(@PathVariable Long id) {
         CourseEntity courseEntity = new CourseEntity();
         courseEntity.setId(id);
-
         //Set Course Publishing Status
-        courseEntity.setStatus("Normal");
+        courseEntity.setStatus(CourseStatus.NORMAL.getDesc());
+
         courseService.save(courseEntity);
         return Result.success();
     }
 
     @DeleteMapping("{courseId}")
     public Result deleteCourse(@PathVariable Long courseId) {
-        courseService.removeCourse(courseId);
+        courseService.removeById(courseId);
         return Result.success();
     }
 }

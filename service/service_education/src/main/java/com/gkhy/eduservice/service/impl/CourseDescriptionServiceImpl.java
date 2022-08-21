@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-07-17
  */
 @Service
-public class CourseDescriptionServiceImpl extends
+public final class CourseDescriptionServiceImpl extends
         ServiceImpl<CourseDescriptionEntity, Long, CourseDescriptionRepository>
         implements CourseDescriptionService {
 

@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 @Service
-public class ChapterServiceImpl extends
+public final class ChapterServiceImpl extends
         ServiceImpl<ChapterEntity, Long, ChapterRepository>
         implements ChapterService {
 
@@ -70,5 +70,4 @@ public class ChapterServiceImpl extends
         }
         return finalList;
     }
-
 }

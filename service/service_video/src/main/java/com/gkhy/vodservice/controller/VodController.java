@@ -1,7 +1,8 @@
 package com.gkhy.vodservice.controller;
 
-import com.gkhy.commonutils.result.Result;
-import com.gkhy.servicebase.exceptionhandler.EducationException;
+import com.gkhy.servicebase.error.AcademyError;
+import com.gkhy.servicebase.exceptionhandler.AcademyException;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.vodservice.service.VodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,9 @@ public class VodController {
         return Result.success().data("videoId",videoId);
     }
 
-    @DeleteMapping("removeAlyVideo/{id}")
-    public Result removeAlyVideo(@PathVariable String id) {
+    @DeleteMapping("remove/{id}")
+    public Result removeById(@PathVariable("id")  Long id) {
+        System.out.println("feign------------" + id);
         try {
 //            //初始化对象
 //            DefaultAcsClient client = InitVodCilent.initVodClient(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET);
@@ -34,18 +36,19 @@ public class VodController {
 //            //向request设置视频id
 //            request.setVideoIds(id);
 //            //调用初始化对象的方法实现删除
-//            client.getAcsResponse(request);
+//
+
             return Result.success();
         }catch(Exception e) {
             e.printStackTrace();
-            throw new EducationException(20001,"删除视频失败");
+            throw new AcademyException(AcademyError.DELETE_ERROR.getCode(), AcademyError.DELETE_ERROR.getMessage());
         }
     }
 
     //删除多个阿里云视频的方法
     //参数多个视频id  List videoIdList
     @DeleteMapping("delete-batch")
-    public Result deleteBatch(@RequestParam("videoIdList") List<String> videoIdList) {
+    public Result deleteBatch(@RequestParam("videoIdList") List<Long> videoIdList) {
         vodService.removeMoreAlyVideo(videoIdList);
         return Result.success();
     }
@@ -66,7 +69,7 @@ public class VodController {
 //            String playAuth = response.getPlayAuth();
             return Result.success().data("playAuth","playAuth");
         }catch(Exception e) {
-            throw new EducationException(20001,"获取凭证失败");
+            throw new AcademyException(20001,"获取凭证失败");
         }
     }
 }

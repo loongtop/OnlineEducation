@@ -2,7 +2,7 @@ package com.gkhy.educentre.controller;
 
 import com.gkhy.commonutils.JwtUtils;
 import com.gkhy.commonutils.ordervo.UcenterMemberOrder;
-import com.gkhy.commonutils.result.Result;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.educentre.entity.UcenterMember;
 import com.gkhy.educentre.entity.vo.RegisterVo;
 import com.gkhy.educentre.service.UcenterMemberService;

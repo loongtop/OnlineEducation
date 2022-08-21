@@ -1,7 +1,7 @@
 package com.gkhy.eduservice.service;
 
-
 import com.gkhy.eduservice.entity.ChapterEntity;
+import com.gkhy.eduservice.entity.VideoEntity;
 import com.gkhy.eduservice.entity.chapter.ChapterVo;
 
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.Optional;
  * @author leo
  * @since 2022-07-20
  */
+
 public interface ChapterService {
 
     //List of course syllabus, query according to course id
@@ -27,4 +28,6 @@ public interface ChapterService {
     Optional<ChapterEntity> findById(Long id);
 
     void removeById(Long courseId);
+
+    void update(Object chapterForm, ChapterEntity chapterEntity);
 }

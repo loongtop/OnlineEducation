@@ -22,7 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table(name = "edu_subject")
 public class SubjectEntity extends DateModel implements Serializable {
 
     private static final long serialVersionUID = 366835828919658691L;

@@ -6,11 +6,11 @@ import java.math.BigDecimal;
 
 @Data
 public class CourseInfoVo {
-    private String id;
+    private Long id;
 
-    private String teacherId;
+    private Long teacherId;
 
-    private String subjectId;
+    private Long subjectId;
 
     private String title;
 

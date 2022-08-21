@@ -5,6 +5,7 @@ import com.gkhy.eduservice.entity.vo.CourseInfoVo;
 import com.gkhy.eduservice.entity.vo.CoursePublishVo;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseService {
     List<CourseEntity> findAll();
@@ -13,13 +14,16 @@ public interface CourseService {
 
     CourseInfoVo getCourseInfo(Long courseId);
 
-    void updateCourseInfo(CourseInfoVo courseInfoVo);
-
-    void updateById(CourseEntity eduCourse);
-
-    void removeCourse(Long courseId);
-
     CoursePublishVo publishCourseInfo(Long id);
 
     void save(CourseEntity courseEntity);
+
+    Optional<CourseEntity> findById(Long courseId);
+
+    boolean existsById(Long courseId);
+
+    void update(Object courseInfoVo, CourseEntity courseEntity);
+
+    void removeById(Long courseId);
+
 }
