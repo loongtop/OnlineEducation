@@ -1,25 +1,30 @@
 package com.gkhy.commonutils.result;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-//The class that returns the result uniformly
-@Data
+/**
+ * return value
+ * This class that returns the result uniformly for the whole project
+ * @author leo
+ * @date 2022-06-02
+ */
+
+@Getter
+@Setter
 @Component
-public class Result {
+public final class Result extends HashMap<String, Object> {
+
+    private static final long serialVersionUID = -2666368596113433194L;
 
     private Boolean success;
-
     private Integer code;
-
     private String message;
-
-    private Map<String, Object> data = new HashMap<>();
-
-    private Result() {}
 
     public static Result success() {
         Result r = new Result();
@@ -53,12 +58,12 @@ public class Result {
     }
 
     public Result data(String key, Object value){
-        this.data.put(key, value);
+        super.put(key, value);
         return this;
     }
 
     public Result data(Map<String, Object> map){
-        this.setData(map);
+        super.putAll(map);
         return this;
     }
 }

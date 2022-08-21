@@ -1,7 +1,7 @@
 package com.gkhy.eduservice;
 
-import com.gkhy.eduservice.entity.EduTeacher;
-import com.gkhy.eduservice.service.impl.EduTeacherServiceImpl;
+import com.gkhy.eduservice.entity.TeacherEntity;
+import com.gkhy.eduservice.service.impl.TeacherServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +27,18 @@ import java.util.Optional;
 class EduApplicationTests {
 
     @Autowired
-    private EduTeacherServiceImpl eduTeacherService;
+    private TeacherServiceImpl eduTeacherService;
 
     @Test
     void findAll() {
         // test
-        List<EduTeacher> eduTeacherList =  eduTeacherService.findAll();
+        List<TeacherEntity> eduTeacherList =  eduTeacherService.findAll();
         System.out.println(eduTeacherList);
     }
 
     @Test
     public void findOne() {
-        Specification<EduTeacher> spe = new Specification<EduTeacher>() {
+        Specification<TeacherEntity> spe = new Specification<>() {
             /**
              * return Predicate: Defined query criteria .
              * param "Root<EduTeacher>" root: Root object , The object that encapsulates the query criteria .
@@ -46,17 +46,17 @@ class EduApplicationTests {
              * param "CriteriaBuilder" cb: Create a query condition .
              */
             @Override
-            public Predicate toPredicate(Root<EduTeacher> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+            public Predicate toPredicate(Root<TeacherEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 return cb.equal(root.get("name"), "王二");
             }
         };
-        Optional<EduTeacher> eduTeacher = eduTeacherService.findOne(spe);
+        Optional<TeacherEntity> eduTeacher = eduTeacherService.findOne(spe);
         System.out.println(eduTeacher);
     }
 
     @Test
     public void findOneByNameAndLevel() {
-        Specification<EduTeacher> spe = (root, query, cb) -> {
+        Specification<TeacherEntity> spe = (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
             list.add(cb.equal(root.get("name"), "王五"));
             list.add(cb.equal(root.get("level"), 1));
@@ -64,24 +64,24 @@ class EduApplicationTests {
             Predicate[] arr = new Predicate[length];
             return cb.and(list.toArray(arr));
         };
-        Optional<EduTeacher> eduTeacher = eduTeacherService.findOne(spe);
+        Optional<TeacherEntity> eduTeacher = eduTeacherService.findOne(spe);
         System.out.println(eduTeacher);
     }
 
     @Test
     public void findByNameOr() {
-        Specification<EduTeacher> spe = (root, query, cb) -> cb.or(cb.equal(root.get("name"), "李四"), cb.equal(root.get("name"), "张三"));
-        List<EduTeacher> list = eduTeacherService.findAll(spe);
-        for (EduTeacher user : list) {
+        Specification<TeacherEntity> spe = (root, query, cb) -> cb.or(cb.equal(root.get("name"), "李四"), cb.equal(root.get("name"), "张三"));
+        List<TeacherEntity> list = eduTeacherService.findAll(spe);
+        for (TeacherEntity user : list) {
             System.out.println(user);
         }
     }
 
     @Test
     public void findByNameLike() {
-        Specification<EduTeacher> spe = (root, query, cb) -> cb.like(root.get("name"), "李%");
-        List<EduTeacher> list = eduTeacherService.findAll(spe);
-        for (EduTeacher user : list) {
+        Specification<TeacherEntity> spe = (root, query, cb) -> cb.like(root.get("name"), "李%");
+        List<TeacherEntity> list = eduTeacherService.findAll(spe);
+        for (TeacherEntity user : list) {
             System.out.println(user);
         }
     }
@@ -95,7 +95,7 @@ class EduApplicationTests {
         LocalDateTime endLocal = LocalDateTime.parse(end);
 
         //Create Specification object
-        Specification<EduTeacher> specification = (root, query, cb) -> {
+        Specification<TeacherEntity> specification = (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
             list.add(cb.equal(root.get("name"), "张三"));
 
@@ -108,37 +108,37 @@ class EduApplicationTests {
 
         Pageable pageable = PageRequest.of(0, 2);
 
-        Page<EduTeacher> eduTeacherList = eduTeacherService.findAll(specification, pageable);
+        Page<TeacherEntity> eduTeacherList = eduTeacherService.findAll(specification, pageable);
 
-        for (EduTeacher user : eduTeacherList) System.out.println(user);
+        for (TeacherEntity user : eduTeacherList) System.out.println(user);
 
     }
 
     @Test
     public void pageable() {
-        Specification<EduTeacher> spe = (root, query, cb) -> cb.between(root.get("id"), 47, 51);
+        Specification<TeacherEntity> spe = (root, query, cb) -> cb.between(root.get("id"), 47, 51);
         Pageable pageable = PageRequest.of(0, 5);
-        Page<EduTeacher> list = eduTeacherService.findAll(spe, pageable);
-        for (EduTeacher user : list) System.out.println(user);
+        Page<TeacherEntity> list = eduTeacherService.findAll(spe, pageable);
+        for (TeacherEntity user : list) System.out.println(user);
     }
 
     @Test
     public void sort() {
-        Specification<EduTeacher> spe = (root, query, cb) -> cb.greaterThan(root.get("id"), 51);
+        Specification<TeacherEntity> spe = (root, query, cb) -> cb.greaterThan(root.get("id"), 51);
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<EduTeacher> list = eduTeacherService.findAll(spe, sort);
-        for (EduTeacher user : list) {
+        List<TeacherEntity> list = eduTeacherService.findAll(spe, sort);
+        for (TeacherEntity user : list) {
             System.out.println(user);
         }
     }
 
     @Test
     public void pageableAndSort() {
-        Specification<EduTeacher> spe = (root, query, cb) -> cb.ge(root.get("id"), 51);
+        Specification<TeacherEntity> spe = (root, query, cb) -> cb.ge(root.get("id"), 51);
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(0, 3, sort);
-        Page<EduTeacher> list = eduTeacherService.findAll(spe, pageable);
-        for (EduTeacher user : list) System.out.println(user);
+        Page<TeacherEntity> list = eduTeacherService.findAll(spe, pageable);
+        for (TeacherEntity user : list) System.out.println(user);
     }
 
 }
