@@ -1,4 +1,4 @@
-package com.gkhy.servicebase.exceptionhandler;
+package com.gkhy.servicebase.exception;
 
 import com.gkhy.servicebase.result.Result;
 import lombok.extern.slf4j.Slf4j;

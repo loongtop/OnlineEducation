@@ -5,7 +5,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.gkhy.eduservice.entity.SubjectEntity;
 import com.gkhy.eduservice.entity.excel.SubjectData;
 import com.gkhy.eduservice.service.SubjectService;
-import com.gkhy.servicebase.exceptionhandler.AcademyException;
+import com.gkhy.servicebase.exception.AcademyException;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;

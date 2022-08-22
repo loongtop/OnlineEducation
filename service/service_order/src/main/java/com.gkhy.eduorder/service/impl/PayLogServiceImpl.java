@@ -11,7 +11,6 @@ import java.util.Map;
 public class PayLogServiceImpl implements PayLogService {
 
     private final PayLogRepository payLogRepository;
-
     @Autowired
     public PayLogServiceImpl(PayLogRepository payLogRepository) {
         this.payLogRepository = payLogRepository;

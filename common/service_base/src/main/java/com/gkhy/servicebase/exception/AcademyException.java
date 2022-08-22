@@ -1,4 +1,4 @@
-package com.gkhy.servicebase.exceptionhandler;
+package com.gkhy.servicebase.exception;
 
 import lombok.*;
 

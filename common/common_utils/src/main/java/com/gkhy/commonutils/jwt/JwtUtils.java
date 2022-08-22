@@ -1,9 +1,10 @@
-package com.gkhy.commonutils;
+package com.gkhy.commonutils.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.experimental.UtilityClass;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +14,13 @@ import java.util.Date;
  * @author leo
  * @since 2022/07/21
  */
+@UtilityClass
 public class JwtUtils {
 
-    //常量
-    public static final long EXPIRE = 1000 * 60 * 60 * 24; //token过期时间
+    public static final long EXPIRE = 1000 * 60 * 60 * 24; //expiration time
     public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥
 
-    //生成token字符串的方法
+    //to generate token string
     public static String getJwtToken(String id, String nickname){
 
         return Jwts.builder()
@@ -30,7 +31,7 @@ public class JwtUtils {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
 
-                .claim("id", id)  //设置token主体部分 ，存储用户信息
+                .claim("id", id)  // Set the token body part to store user information
                 .claim("nickname", nickname)
 
                 .signWith(SignatureAlgorithm.HS256, APP_SECRET)
@@ -38,7 +39,7 @@ public class JwtUtils {
     }
 
     /**
-     * 判断token是否存在与有效
+     * Determine whether the token exists and is valid
      */
     public static boolean checkToken(String jwtToken) {
         if(!StringUtils.hasLength(jwtToken)) return false;
@@ -52,7 +53,7 @@ public class JwtUtils {
     }
 
     /**
-     * 判断token是否存在与有效
+     * Determine whether the token exists and is valid
      */
     public static boolean checkToken(HttpServletRequest request) {
         try {
@@ -67,9 +68,9 @@ public class JwtUtils {
     }
 
     /**
-     * 根据token字符串获取会员id
-     * @param
-     * @return
+     * Get member id based on token string
+     * @param request : Http ServletRequest
+     * @return id : id
      */
     public static String getMemberIdByJwtToken(HttpServletRequest request) {
         String jwtToken = request.getHeader("token");

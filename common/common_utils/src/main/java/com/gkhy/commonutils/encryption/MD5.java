@@ -1,15 +1,17 @@
-package com.gkhy.commonutils;
+package com.gkhy.commonutils.encryption;
+
+import lombok.experimental.UtilityClass;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
+@UtilityClass
 public final class MD5 {
 
     public static String encrypt(String strSrc) {
         try {
-            char[] hexChars = { '0', '1', '2', '3', '4', '5', '6', '7', '8',
-                    '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+            char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
+                    '9', 'a', 'b', 'c', 'd', 'e', 'f'};
             byte[] bytes = strSrc.getBytes();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(bytes);
@@ -26,7 +28,7 @@ public final class MD5 {
             return new String(chars);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            throw new RuntimeException("MD5加密出错！！+" + e);
+            throw new RuntimeException("MD5 encryption error！！+" + e);
         }
     }
 

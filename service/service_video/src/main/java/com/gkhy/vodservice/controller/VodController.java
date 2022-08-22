@@ -1,7 +1,7 @@
 package com.gkhy.vodservice.controller;
 
 import com.gkhy.servicebase.error.AcademyError;
-import com.gkhy.servicebase.exceptionhandler.AcademyException;
+import com.gkhy.servicebase.exception.AcademyException;
 import com.gkhy.servicebase.result.Result;
 import com.gkhy.vodservice.service.VodService;
 import org.springframework.beans.factory.annotation.Autowired;

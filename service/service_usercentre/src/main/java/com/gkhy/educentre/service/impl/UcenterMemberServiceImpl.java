@@ -1,12 +1,12 @@
 package com.gkhy.educentre.service.impl;
 
-import com.gkhy.commonutils.JwtUtils;
-import com.gkhy.commonutils.MD5;
+import com.gkhy.commonutils.encryption.MD5;
+import com.gkhy.commonutils.jwt.JwtUtils;
 import com.gkhy.educentre.entity.UcenterMember;
 import com.gkhy.educentre.entity.vo.RegisterVo;
 import com.gkhy.educentre.repository.UcenterMemberRepository;
 import com.gkhy.educentre.service.UcenterMemberService;
-import com.gkhy.servicebase.exceptionhandler.AcademyException;
+import com.gkhy.servicebase.exception.AcademyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.redis.core.RedisTemplate;

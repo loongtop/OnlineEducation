@@ -1,6 +1,6 @@
 package com.gkhy.eduorder.controller;
 
-import com.gkhy.commonutils.JwtUtils;
+import com.gkhy.commonutils.jwt.JwtUtils;
 import com.gkhy.eduorder.service.OrderService;
 import com.gkhy.servicebase.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,28 +29,27 @@ public class OrderController {
     }
 
     @PostMapping("/createOrder/{courseId}")
-    public Result createOrder(@PathVariable String courseId, HttpServletRequest request){
+    public Result createOrder(@PathVariable String courseId, HttpServletRequest request) {
 
         //创建订单，返回订单号
         String orderNo = orderService.createOrder(courseId, JwtUtils.getMemberIdByJwtToken(request));
 
-        return Result.success().data("orderNo",orderNo);
+        return Result.success().data("orderNo", orderNo);
     }
 
     @GetMapping("/getOrderInfo/{orderNo}")
-    public Result getOrderInfo(@PathVariable String orderNo){
+    public Result getOrderInfo(@PathVariable String orderNo) {
 
         return Result.success();
     }
 
     @GetMapping("/isBuyCourse/{courseId}/{memberId}")
-    public Boolean isBoughtCourse(@PathVariable String courseId,@PathVariable String memberId){
+    public Boolean isBoughtCourse(@PathVariable String courseId, @PathVariable String memberId) {
 
-        int count = orderService.count();
-        if(count > 0){
-            return true;
-        }
-        return false;
+        long count = orderService.count();
+
+        return true;
+
     }
 }
 

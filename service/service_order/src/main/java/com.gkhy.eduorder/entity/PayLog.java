@@ -17,9 +17,6 @@ import java.util.Date;
  * @author leo
  * @since 2020-07-20
  */
-
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -29,7 +26,7 @@ public class PayLog extends DateModel {
     private static final long serialVersionUID = 402433662897235817L;
 
     @Id
-    private String id;
+    private Long id;
 
     private String orderNo;
 
@@ -37,7 +34,7 @@ public class PayLog extends DateModel {
 
     private BigDecimal totalFee;
 
-    private String transactionId;
+    private Long transactionId;
 
     private String tradeState;
 

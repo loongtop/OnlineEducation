@@ -28,11 +28,11 @@ public class Order extends DateModel {
     private static final long serialVersionUID = 4716562029132875978L;
 
     @Id
-    private String id;
+    private Long id;
 
     private String orderNo;
 
-    private String courseId;
+    private Long courseId;
 
     private String courseTitle;
 
@@ -40,7 +40,7 @@ public class Order extends DateModel {
 
     private String teacherName;
 
-    private String memberId;
+    private Long memberId;
 
     private String nickname;
 

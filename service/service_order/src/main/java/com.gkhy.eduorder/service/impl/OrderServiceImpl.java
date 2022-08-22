@@ -1,16 +1,20 @@
 package com.gkhy.eduorder.service.impl;
 
+import com.gkhy.eduorder.entity.Order;
 import com.gkhy.eduorder.repository.OrderRepository;
 import com.gkhy.eduorder.service.OrderService;
+import com.gkhy.servicebase.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class OrderServiceImpl implements OrderService {
-
-    private final OrderRepository orderRepository;
+@Service
+public final class OrderServiceImpl extends
+        ServiceImpl<Order, Long, OrderRepository>
+        implements OrderService {
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public OrderServiceImpl(OrderRepository iRepository) {
+        super(iRepository);
     }
 
     @Override
@@ -18,8 +22,4 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
-    @Override
-    public int count() {
-        return 0;
-    }
 }

@@ -1,10 +1,10 @@
 package com.gkhy.eduorder.repository;
 
 import com.gkhy.eduorder.entity.Order;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import com.gkhy.servicebase.service.repository.IRepositoryBase;
+import org.springframework.stereotype.Repository;
 
-public interface OrderRepository extends
-        JpaSpecificationExecutor<Order>,
-        JpaRepository<Order, String>  {
+@Repository
+public interface OrderRepository extends IRepositoryBase<Order, Long> {
 }
+

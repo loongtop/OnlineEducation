@@ -1,6 +1,6 @@
 package com.gkhy.educentre.controller;
 
-import com.gkhy.commonutils.JwtUtils;
+import com.gkhy.commonutils.jwt.JwtUtils;
 import com.gkhy.commonutils.ordervo.UcenterMemberOrder;
 import com.gkhy.servicebase.result.Result;
 import com.gkhy.educentre.entity.UcenterMember;

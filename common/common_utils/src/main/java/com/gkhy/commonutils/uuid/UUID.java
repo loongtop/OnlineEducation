@@ -13,13 +13,12 @@
  */
 package com.gkhy.commonutils.uuid;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class UUID {
 
-    private UUID() {
-        throw new UnsupportedOperationException("Cannot instantiate a Util class");
-    }
-
-    public static String generateRandomUuid() {
+    public static String generate() {
         return java.util.UUID.randomUUID().toString();
     }
 }

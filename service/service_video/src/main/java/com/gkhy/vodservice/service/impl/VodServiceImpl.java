@@ -1,7 +1,7 @@
 package com.gkhy.vodservice.service.impl;
 
 
-import com.gkhy.servicebase.exceptionhandler.AcademyException;
+import com.gkhy.servicebase.exception.AcademyException;
 import com.gkhy.vodservice.service.VodService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.servicebase.exceptionhandler.AcademyException;
+import com.gkhy.servicebase.exception.AcademyException;
 import com.gkhy.servicebase.result.Result;
 import com.gkhy.eduservice.entity.subject.MainSubject;
 import com.gkhy.eduservice.service.SubjectService;
