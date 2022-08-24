@@ -22,14 +22,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/educms/bannerfront")
 @CrossOrigin
-public class BannerFrontController {
+public final class BannerFrontController {
 
+    private final CrmBannerService bannerService;
     @Autowired
-    private CrmBannerService bannerService;
+    public BannerFrontController(CrmBannerService bannerService) {
+        this.bannerService = bannerService;
+    }
 
     @GetMapping("getAllBanner")
     public Result getAllBanner() {
-        List<CrmBanner> list = bannerService.findAll();
+        List<CrmBanner> list = bannerService.findAllOrderByIdDescLimit3();
         return Result.success().data("list",list);
     }
 }

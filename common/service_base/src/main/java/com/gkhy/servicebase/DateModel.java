@@ -15,6 +15,10 @@ package com.gkhy.servicebase;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -40,11 +44,15 @@ import java.time.LocalDateTime;
 public abstract class DateModel implements Serializable {
 
     @CreatedDate
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
     @Column(nullable = false, updatable = false)
     private LocalDateTime gmtCreate;
 
     @LastModifiedDate
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
     @Column(nullable = false)
     private LocalDateTime gmtModified;

@@ -7,6 +7,7 @@ import com.gkhy.eduservice.service.TeacherService;
 import com.gkhy.servicebase.service.ServiceImpl;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ import java.util.Objects;
  */
 
 @Service
-public final class TeacherServiceImpl extends
+public class TeacherServiceImpl extends
         ServiceImpl<TeacherEntity, Long, TeacherRepository>
         implements TeacherService {
 
@@ -76,5 +77,11 @@ public final class TeacherServiceImpl extends
         Pageable pageable = PageRequest.of(current-1, limit);
 
         return this.findAll(specification, pageable);
+    }
+
+    @Override
+    @Cacheable(key = "'selectIndexList'",value = "teacher")
+    public List<TeacherEntity> findAllOrderByIdDescLimit2() {
+        return this.findAllOrderByLimit(Sort.Direction.DESC, "id", 2);
     }
 }

@@ -1,8 +1,8 @@
 package com.gkhy.eduservice.controller;
 
+import com.gkhy.servicebase.redis.RedisService;
 import com.gkhy.servicebase.result.Result;
 import com.gkhy.servicebase.utils.ItemFound;
-
 import com.gkhy.eduservice.entity.TeacherEntity;
 import com.gkhy.eduservice.entity.vo.TeacherVo;
 import com.gkhy.eduservice.service.TeacherService;
@@ -29,19 +29,20 @@ import java.util.Optional;
 @RequestMapping("/eduservice/teacher")
 public final class TeacherController {
 
+    private final RedisService redisService;
     private final TeacherService teacherService;
     @Autowired
-    public TeacherController(TeacherService teacherService) {
+    public TeacherController(RedisService redisService, TeacherService teacherService) {
+        this.redisService = redisService;
         this.teacherService = teacherService;
     }
-
-    @Autowired
 
     //Query all data in the lecturer table
     @GetMapping("all")
     public Result findAllTeacher() {
         //Call the method of service to query all operations
-        List<TeacherEntity> teachers = teacherService.findAll();
+        List<TeacherEntity> teachers = teacherService.findAllOrderByIdDescLimit2();
+        redisService.set("findAllTeacher", 1111111);
         return Result.success().data("teachers", teachers);
     }
 

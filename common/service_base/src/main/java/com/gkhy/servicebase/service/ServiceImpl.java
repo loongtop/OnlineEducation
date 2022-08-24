@@ -1,18 +1,16 @@
 package com.gkhy.servicebase.service;
 
-import com.gkhy.servicebase.service.repository.IRepository;
+import com.gkhy.servicebase.service.repository.IService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-public abstract class ServiceImpl<T, E extends Number, Repository extends IRepository<T, E>> {
+public abstract class ServiceImpl<T, E extends Number, Repository extends IService<T, E>> {
 
     protected Repository iRepository;
 
@@ -100,9 +98,15 @@ public abstract class ServiceImpl<T, E extends Number, Repository extends IRepos
         return iRepository.findOne(example);
     }
 
+    public Page<T> findAll(int current, int limit) {
+        Pageable pageable = PageRequest.of(current - 1, limit);
+        return iRepository.findAll(pageable);
+    }
+
     public <S extends T> Page<S> findAll(Example<S> example, Pageable pageable) {
         return iRepository.findAll(example, pageable);
     }
+
 
     public <S extends T> long count(Example<S> example) {
         return iRepository.count(example);
@@ -128,4 +132,10 @@ public abstract class ServiceImpl<T, E extends Number, Repository extends IRepos
         BeanUtils.copyProperties(o, entity);
         iRepository.saveAndFlush(entity);
     }
+
+    public List<T> findAllOrderByLimit(Sort.Direction direction, String property, int limit ) {
+        Sort sort = Sort.by(direction, property);
+        return  new ArrayList<T>(iRepository.findAll(sort).subList(0, limit));
+    }
+
 }

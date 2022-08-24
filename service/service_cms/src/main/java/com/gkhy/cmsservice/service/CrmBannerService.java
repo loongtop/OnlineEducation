@@ -4,17 +4,16 @@ import com.gkhy.cmsservice.entity.CrmBanner;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CrmBannerService {
-    List<CrmBanner> findAll();
+    Page<CrmBanner> findAll(int page, int limit);
 
     void save(CrmBanner crmBanner);
 
-    Page<CrmBanner> findAll(long page, long limit);
+    Optional<CrmBanner> findById(Long id);
 
-    CrmBanner getById(String id);
+    void removeById(Long id);
 
-    void removeById(String id);
-
-    void update(CrmBanner banner);
+    List<CrmBanner> findAllOrderByIdDescLimit3();
 }

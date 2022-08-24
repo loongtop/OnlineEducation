@@ -26,4 +26,5 @@ public interface CourseService {
 
     void removeById(Long courseId);
 
+    List<CourseEntity> findAllOrderByIdDescLimit4();
 }

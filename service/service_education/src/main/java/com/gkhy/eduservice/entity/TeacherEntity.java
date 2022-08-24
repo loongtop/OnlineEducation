@@ -16,11 +16,11 @@ import javax.validation.constraints.Size;
  * @since 2022-07-11
  */
 
-@Accessors(chain = true)
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 @Entity
 @Table(name= "edu_teacher")
 public class TeacherEntity extends DateModel {

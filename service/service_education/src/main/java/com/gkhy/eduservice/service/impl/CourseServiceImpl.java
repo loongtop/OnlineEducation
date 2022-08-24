@@ -12,8 +12,10 @@ import com.gkhy.eduservice.service.VideoService;
 import com.gkhy.servicebase.service.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -98,6 +100,8 @@ public final class CourseServiceImpl extends
         return courseInfoVo;
     }
 
-
-
+    @Override
+    public List<CourseEntity> findAllOrderByIdDescLimit4() {
+        return this.findAllOrderByLimit(Sort.Direction.DESC, "id", 4);
+    }
 }

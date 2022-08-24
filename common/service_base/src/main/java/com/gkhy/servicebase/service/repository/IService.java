@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface IRepository<T, E extends Number> {
+public interface IService<T, E extends Number> {
 
     Optional<T> findOne(Specification<T> spec);
 

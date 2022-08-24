@@ -35,4 +35,8 @@ public interface TeacherService {
     void save(TeacherEntity eduTeacher);
 
     void update(Object teacherIn, TeacherEntity teacher);
+
+    List<TeacherEntity> findAll(Sort sort);
+
+    List<TeacherEntity> findAllOrderByIdDescLimit2();
 }
