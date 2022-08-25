@@ -28,8 +28,8 @@ import java.util.Optional;
  */
 
 @Service
-public final class CourseServiceImpl extends
-        ServiceImpl<CourseEntity, Long, CourseRepository>
+public final class CourseServiceImpl
+        extends ServiceImpl<CourseEntity, Long, CourseRepository>
         implements CourseService {
 
     private final CourseDescriptionService courseDescriptionService;

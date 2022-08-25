@@ -1,7 +1,7 @@
 package com.gkhy.eduorder.repository;
 
 import com.gkhy.eduorder.entity.PayLog;
-import com.gkhy.servicebase.service.repository.IRepositoryBase;
+import com.gkhy.servicebase.service.IRepositoryBase;
 import org.springframework.stereotype.Repository;
 
 @Repository

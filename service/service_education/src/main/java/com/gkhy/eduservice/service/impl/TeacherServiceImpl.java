@@ -30,8 +30,8 @@ import java.util.Objects;
  */
 
 @Service
-public class TeacherServiceImpl extends
-        ServiceImpl<TeacherEntity, Long, TeacherRepository>
+public class TeacherServiceImpl
+        extends ServiceImpl<TeacherEntity, Long, TeacherRepository>
         implements TeacherService {
 
     @Autowired

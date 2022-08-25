@@ -42,7 +42,7 @@ public final class TeacherController {
     public Result findAllTeacher() {
         //Call the method of service to query all operations
         List<TeacherEntity> teachers = teacherService.findAllOrderByIdDescLimit2();
-        redisService.set("findAllTeacher", 1111111);
+        redisService.set("findAllTeacher", 22222);
         return Result.success().data("teachers", teachers);
     }
 
