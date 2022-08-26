@@ -1,7 +1,5 @@
 package com.gkhy.educentre.entity.form;
 
-
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
