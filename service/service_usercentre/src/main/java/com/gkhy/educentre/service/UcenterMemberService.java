@@ -1,23 +1,18 @@
 package com.gkhy.educentre.service;
 
 import com.gkhy.educentre.entity.UcenterMember;
-import com.gkhy.educentre.entity.vo.RegisterVo;
+import com.gkhy.educentre.entity.form.MemberForm;
 
-/**
- * <p>
- * Membership Form Services
- * </p>
- *
- * @author leo
- * @since 2022-07-20
- */
-public interface UcenterMemberService  {
+import java.util.Optional;
+
+
+public interface UcenterMemberService {
 
     String login(UcenterMember member);
 
-    void register(RegisterVo registerVo);
-
-    UcenterMember getById(String memberId);
-
     UcenterMember getOpenIdMember(String openid);
+
+    Optional<UcenterMember> findById(Long id);
+
+    void register(MemberForm memberForm);
 }

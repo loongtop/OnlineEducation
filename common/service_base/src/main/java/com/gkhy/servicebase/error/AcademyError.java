@@ -21,8 +21,7 @@ public enum AcademyError implements IAcademyError {
 
 //    UPLOAD_FILE_ERROR(20010,"File upload failed"),
 //    VALID_CODE_SEND_FAIL(20013,"Send SMS verification code failed"),
-//    LOGIN_ERROR(20014,"Login failed, wrong username or password!"),
-//    REGISTER_ERROR(20015,"Registration failed"),
+//
 //    GET_PLAY_AUTH_FAIL(20016,"Failed to get video credentials"),
 //    REMOTE_CALL_COURSE(20017,"Failed to query course information by remote call"),
 //    REMOTE_CALL_MEMBER(20018,"Failed to call member module remotely"),
