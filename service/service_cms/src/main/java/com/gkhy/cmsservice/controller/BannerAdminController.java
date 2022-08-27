@@ -1,8 +1,8 @@
 package com.gkhy.cmsservice.controller;
 
-import com.gkhy.servicebase.result.Result;
 import com.gkhy.cmsservice.entity.CrmBanner;
 import com.gkhy.cmsservice.service.CrmBannerService;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.servicebase.utils.ItemFound;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

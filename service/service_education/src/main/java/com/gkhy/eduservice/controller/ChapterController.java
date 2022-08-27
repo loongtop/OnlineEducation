@@ -1,10 +1,10 @@
 package com.gkhy.eduservice.controller;
 
-import com.gkhy.eduservice.entity.form.ChapterForm;
-import com.gkhy.servicebase.result.Result;
 import com.gkhy.eduservice.entity.ChapterEntity;
 import com.gkhy.eduservice.entity.chapter.ChapterVo;
+import com.gkhy.eduservice.entity.form.ChapterForm;
 import com.gkhy.eduservice.service.ChapterService;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.servicebase.utils.ItemFound;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

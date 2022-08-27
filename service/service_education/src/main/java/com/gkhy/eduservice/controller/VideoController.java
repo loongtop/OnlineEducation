@@ -1,11 +1,11 @@
 package com.gkhy.eduservice.controller;
 
+import com.gkhy.eduservice.entity.VideoEntity;
 import com.gkhy.eduservice.entity.form.VideoForm;
 import com.gkhy.eduservice.error.EducationError;
 import com.gkhy.eduservice.feign.VideoFeignClient;
-import com.gkhy.servicebase.result.Result;
-import com.gkhy.eduservice.entity.VideoEntity;
 import com.gkhy.eduservice.service.VideoService;
+import com.gkhy.servicebase.result.Result;
 import com.gkhy.servicebase.utils.ItemFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

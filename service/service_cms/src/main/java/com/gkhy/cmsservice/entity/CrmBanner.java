@@ -1,16 +1,15 @@
 package com.gkhy.cmsservice.entity;
 
+import com.gkhy.servicebase.DateModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import com.gkhy.servicebase.DateModel;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * <p>
