@@ -1,7 +1,6 @@
 package com.gkhy.eduservice.service;
 
 import com.gkhy.eduservice.entity.VideoEntity;
-import com.gkhy.eduservice.entity.form.VideoForm;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;

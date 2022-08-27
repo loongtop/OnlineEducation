@@ -1,22 +1,25 @@
-package com.gkhy.eduorder;
+package com.gkhy.serviceoauth2;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableDiscoveryClient
 @EnableFeignClients
-@SpringBootApplication
-@ComponentScan("com.gkhy")
-public class OrdersApplication {
+@ComponentScan(basePackages = "com.gkhy")
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+public class Oauth2Application {
+
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(OrdersApplication.class);
+        System.setProperty("spring.devtools.restart.enabled", "false");
+        SpringApplication app = new SpringApplication(Oauth2Application.class);
         app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
-        System.out.println("OrdersApplication starting..........");
+        System.out.println("Oauth2Application starting..........");
     }
+
 }

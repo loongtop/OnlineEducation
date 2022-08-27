@@ -1,4 +1,4 @@
-package com.gkhy.servicesecurity;
+package com.gkhy.aclservice;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -11,12 +11,12 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableFeignClients
 @SpringBootApplication
 @ComponentScan(basePackages = "com.gkhy")
-public class SecurityApplication {
+public class AclApplication {
     public static void main(String[] args) {
         System.setProperty("spring.devtools.restart.enabled", "false");
-        SpringApplication app = new SpringApplication(SecurityApplication.class);
+        SpringApplication app = new SpringApplication(AclApplication.class);
         app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
-        System.out.println("SecurityApplication starting..........");
+        System.out.println("AclApplication starting..........");
     }
 }

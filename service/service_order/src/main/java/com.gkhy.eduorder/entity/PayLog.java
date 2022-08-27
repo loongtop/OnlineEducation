@@ -2,7 +2,6 @@ package com.gkhy.eduorder.entity;
 
 import com.gkhy.servicebase.DateModel;
 import lombok.*;
-import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -19,7 +19,8 @@
         <module>service_education</module>
         <module>service_usercentre</module>
         <module>service_video</module>
-        <module>service_acll</module>
+        <module>service_oauth2</module>
+        <module>service_acl</module>
     </modules>
     <dependencies>
         <dependency>

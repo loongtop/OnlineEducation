@@ -1,9 +1,7 @@
 package com.gkhy.eduservice.service.impl;
 
 import com.gkhy.eduservice.entity.CourseDescriptionEntity;
-import com.gkhy.eduservice.entity.TeacherEntity;
 import com.gkhy.eduservice.repository.CourseDescriptionRepository;
-import com.gkhy.eduservice.repository.TeacherRepository;
 import com.gkhy.eduservice.service.CourseDescriptionService;
 import com.gkhy.servicebase.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

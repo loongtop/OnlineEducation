@@ -6,7 +6,6 @@ import com.gkhy.eduservice.service.CourseService;
 import com.gkhy.eduservice.service.TeacherService;
 import com.gkhy.servicebase.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

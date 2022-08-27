@@ -1,7 +1,6 @@
 package com.gkhy.eduservice.service;
 
 import com.gkhy.eduservice.entity.ChapterEntity;
-import com.gkhy.eduservice.entity.VideoEntity;
 import com.gkhy.eduservice.entity.chapter.ChapterVo;
 
 import java.util.List;

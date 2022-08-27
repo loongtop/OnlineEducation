@@ -1,16 +1,11 @@
 package com.gkhy.ossservice.controller;
 
 import com.gkhy.servicebase.result.Result;
-import com.gkhy.ossservice.config.UploadConfig;
 import com.gkhy.ossservice.service.OssService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.http.MediaType;
-import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import reactor.core.publisher.Mono;
 
 import java.net.URL;
 
