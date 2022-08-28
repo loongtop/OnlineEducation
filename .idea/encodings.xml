@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/common/common_utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/common/common_utils/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/common/service_base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/common/service_base/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_acl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_acl/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_cms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_cms/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_edu/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_education/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_education/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_message/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_message/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_oauth2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_oauth2/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_oss/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_oss/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_video/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_video/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/service_vod/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../new1/OnlineAcademy/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
