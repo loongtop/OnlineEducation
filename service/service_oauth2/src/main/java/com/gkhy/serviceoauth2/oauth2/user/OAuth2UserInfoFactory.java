@@ -2,7 +2,7 @@ package com.gkhy.serviceoauth2.oauth2.user;
 
 
 import com.gkhy.serviceoauth2.exception.OAuth2AuthenticationProcessingException;
-import com.gkhy.serviceoauth2.model.AuthProvider;
+import com.gkhy.serviceoauth2.entity.AuthProvider;
 
 import java.util.Map;
 

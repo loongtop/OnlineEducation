@@ -1,24 +1,13 @@
 spring:
-  server:
-    port: 8006
-  mvc:
-    pathmatch:
-      matching-strategy: ANT_PATH_MATCHER
 
-  application:
-    datasource:
-      url: jdbc:mysql://localhost:3306/guli_usercenter?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
-      username: root
-      password: root!23456
-
-    jpa:
-      show-sql: true
-      hibernate:
-        ddl-auto: update
-        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#    jpa:
+#      show-sql: true
+#      hibernate:
+#        ddl-auto: update
+#        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#      properties:
+#        hibernate:
+#          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     security:
       oauth2:
         client:
@@ -49,7 +38,7 @@ spring:
               authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
               tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
               userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
-    name: service-acl
+
 app:
   auth:
     tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1

@@ -1,4 +1,4 @@
-package com.gkhy.serviceoauth2.model;
+package com.gkhy.serviceoauth2.entity;
 
 import lombok.Builder;
 import lombok.Getter;

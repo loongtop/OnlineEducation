@@ -17,7 +17,6 @@
         <module>service_order</module>
         <module>service_message</module>
         <module>service_education</module>
-        <module>service_usercentre</module>
         <module>service_video</module>
         <module>service_oauth2</module>
         <module>service_acl</module>

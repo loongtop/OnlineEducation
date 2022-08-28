@@ -2,12 +2,12 @@ package com.gkhy.serviceoauth2.oauth2;
 
 import com.gkhy.serviceoauth2.error.Oauth2Error;
 import com.gkhy.serviceoauth2.exception.OAuth2AuthenticationProcessingException;
-import com.gkhy.serviceoauth2.model.AuthProvider;
-import com.gkhy.serviceoauth2.model.User;
-import com.gkhy.serviceoauth2.model.UserFactory;
+import com.gkhy.serviceoauth2.entity.AuthProvider;
+import com.gkhy.serviceoauth2.entity.User;
+import com.gkhy.serviceoauth2.entity.UserFactory;
 import com.gkhy.serviceoauth2.oauth2.user.OAuth2UserInfo;
 import com.gkhy.serviceoauth2.oauth2.user.OAuth2UserInfoFactory;
-import com.gkhy.serviceoauth2.repository.UserRepository;
+import com.gkhy.serviceoauth2.service.UserDetailsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -22,11 +22,11 @@ import java.util.Optional;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
-    
-    private final UserRepository userRepository;
+
+    private final UserDetailsService userDetailsService;
     @Autowired
-    public CustomOAuth2UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomOAuth2UserService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException(Oauth2Error.Email_Not_Find_From_OAuth2);
         }
 
-        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        Optional<User> userOptional = userDetailsService.findByEmail(oAuth2UserInfo.getEmail());
         User user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
@@ -73,14 +73,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 //                .providerId(oAuth2UserInfo.getId())
 //                .email(oAuth2UserInfo.getEmail())
 //                .imageUrl(oAuth2UserInfo.getImageUrl()).build();
-
-        return userRepository.save(user);
+        userDetailsService.save(user);
+        return  user;
     }
 
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setUsername(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
-        return userRepository.save(existingUser);
+        userDetailsService.save(existingUser);
+        return existingUser;
     }
 
 }

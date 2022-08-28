@@ -138,4 +138,19 @@ public abstract class ServiceImpl<T, E extends Number, Repository extends IServi
         return  new ArrayList<T>(iRepository.findAll(sort).subList(0, limit));
     }
 
+    public Optional<T> findByEmail(String email) {
+        return Optional.empty();
+    }
+
+    public boolean existsByEmail(String email) {
+        return false;
+    }
+
+    public Optional<T> findByUserName(String name) {
+        return Optional.empty();
+    }
+
+    public boolean existsByUserName(String name) {
+        return false;
+    }
 }

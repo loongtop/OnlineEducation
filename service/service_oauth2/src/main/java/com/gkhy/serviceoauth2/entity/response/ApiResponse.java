@@ -1,4 +1,4 @@
-package com.gkhy.serviceoauth2.model.response;
+package com.gkhy.serviceoauth2.entity.response;
 
 public class ApiResponse {
     private boolean success;

@@ -2,7 +2,7 @@ package com.gkhy.serviceoauth2.token;
 
 import com.gkhy.serviceoauth2.config.AppProperties;
 import com.gkhy.serviceoauth2.error.Oauth2Error;
-import com.gkhy.serviceoauth2.model.UserFactory;
+import com.gkhy.serviceoauth2.entity.UserFactory;
 import io.jsonwebtoken.*;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

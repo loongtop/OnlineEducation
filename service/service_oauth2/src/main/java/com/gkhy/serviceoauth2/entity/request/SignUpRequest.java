@@ -1,4 +1,4 @@
-package com.gkhy.serviceoauth2.model.request;
+package com.gkhy.serviceoauth2.entity.request;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.gkhy.serviceoauth2.model;
+package com.gkhy.serviceoauth2.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

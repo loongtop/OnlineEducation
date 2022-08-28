@@ -10,4 +10,8 @@ public final class Oauth2Error {
     public static final String Set_Authentication_Failed = "Could not set user authentication in security context";
     public static final String Email_Already_Occupied = "Email address already occupied.";
     public static final String Email_Not_Find_From_OAuth2 = "Email not found from OAuth2 provider";
+
+//    LOGIN_ERROR(20014,"Login failed, wrong username or password!"),
+//    REGISTER_ERROR(20015,"Registration failed"),
+
 }
